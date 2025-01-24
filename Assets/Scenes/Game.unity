@@ -1097,6 +1097,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309575809}
   m_CullTransparentMesh: 1
+--- !u!1 &311530434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311530435}
+  m_Layer: 0
+  m_Name: PlayerAi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &311530435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311530434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 685.2669, y: 538.05835, z: -5.2344227}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &324137481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6175,6 +6206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0fceb0b25c7f664296fca3b0391c847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _heuristicValue: {fileID: 0}
   blackPawn: {fileID: 11400000, guid: 252b1514c937bcf47a3ffb712925ec71, type: 2}
   whitePawn: {fileID: 11400000, guid: f17bf6bc8e89acd44934b7186bef610a, type: 2}
   blackRook: {fileID: 11400000, guid: d193dd5cadc055f4a8d102c3f3821345, type: 2}
@@ -6503,3 +6535,4 @@ SceneRoots:
   - {fileID: 941541265}
   - {fileID: 881802715}
   - {fileID: 590350196}
+  - {fileID: 311530435}

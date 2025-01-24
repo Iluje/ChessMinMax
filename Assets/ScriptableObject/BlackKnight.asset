@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -158494460, guid: 062360b186018484da07e2259b01c197, type: 3}
   isWhite: 0
+  Point: 3
