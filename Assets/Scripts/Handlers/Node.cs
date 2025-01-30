@@ -66,23 +66,23 @@ namespace Handlers
             { 
                 for (int y = 0; y < Pieces.GetLength(1); y++)
                 {
-                    Piece piece = Pieces[x, y];
-                    if (piece != null) //&& piece.isWhite == IsWhiteTurn)
-                    { 
-                        Debug.Log(Pieces[x, y].name);
-                            
-                        Vector2Int position = new Vector2Int(x, y);
-                        List<Vector2Int> availableMovement = piece.AvailableMovements(position);
-                        
-                        foreach (Vector2Int movement in availableMovement)
-                        { 
-                            Node node = new Node(Pieces, false);
-                            //Childrens.Add(node);
-                            node.MovePiece(node.Pieces, piece, position,movement); 
-                            MovePiece(Pieces, piece,position, movement );
-                        }
-                            // Position = position;
-                    } 
+                    // Piece piece = Pieces[x, y];
+                    // if (piece != null) //&& piece.isWhite == IsWhiteTurn)
+                    // { 
+                    //     Debug.Log(Pieces[x, y].name);
+                    //         
+                    //     Vector2Int position = new Vector2Int(x, y);
+                    //     List<Vector2Int> availableMovement = piece.AvailableMovements(position);
+                    //     
+                    //     foreach (Vector2Int movement in availableMovement)
+                    //     { 
+                    //         Node node = new Node(Pieces, false);
+                    //         //Childrens.Add(node);
+                    //         node.MovePiece(node.Pieces, piece, position,movement); 
+                    //         MovePiece(Pieces, piece,position, movement );
+                    //     }
+                    //         // Position = position;
+                    // } 
                 }
             }
 
