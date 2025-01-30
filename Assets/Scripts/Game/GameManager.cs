@@ -29,6 +29,29 @@ namespace Game
             {
                 SceneManager.LoadScene(0);
             }
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Debug.Log("change");
+            }
+        }
+
+        private void Start()
+        {
+            
+        }
+
+        private void TestGame()
+        {
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, true);
+        }
+        
+        [ContextMenu("Think")]
+        private void Think()
+        {
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, true);
+            Debug.Log(currentNode.HeursticValue());
+            Debug.Log(currentNode.Children());
         }
     }
 }

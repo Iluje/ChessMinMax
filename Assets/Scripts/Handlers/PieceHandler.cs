@@ -43,7 +43,8 @@ namespace Handlers
                     BoardsHandler.Instance.DisplayMatrix();
             
                     List<Vector2Int> availableMovements = Piece.AvailableMovements(_position);
-            
+                   
+                    
                     foreach (Vector2Int availableMovement in availableMovements)
                     {
                         BoardsHandler.Instance.PiecesDisplay[availableMovement.x, availableMovement.y].GetComponent<PieceHandler>()._isMovement = true;

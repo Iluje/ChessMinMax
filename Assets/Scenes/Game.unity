@@ -6206,7 +6206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0fceb0b25c7f664296fca3b0391c847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heuristicValue: {fileID: 0}
   blackPawn: {fileID: 11400000, guid: 252b1514c937bcf47a3ffb712925ec71, type: 2}
   whitePawn: {fileID: 11400000, guid: f17bf6bc8e89acd44934b7186bef610a, type: 2}
   blackRook: {fileID: 11400000, guid: d193dd5cadc055f4a8d102c3f3821345, type: 2}
@@ -6222,6 +6221,8 @@ MonoBehaviour:
   piecePrefab: {fileID: 2690092191498240832, guid: 875af057ef7811b478248121b8e5ba04, type: 3}
   transparentPrefab: {fileID: 2580139010474514594, guid: 4d15e502787270841aab043eeb57a99e, type: 3}
   gridParent: {fileID: 2013352920}
+  NumberOfNode: 0
+  GameManager: {fileID: 324137483}
 --- !u!1 &2036374905
 GameObject:
   m_ObjectHideFlags: 0

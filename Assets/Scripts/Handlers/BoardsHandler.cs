@@ -8,9 +8,10 @@ namespace Handlers
 {
     public class BoardsHandler : MonoBehaviourSingleton<BoardsHandler>
     {
-        [Header("Pieces Data")] [SerializeField]
-        private HeuristicValue _heuristicValue;
         
+       // [Header("Pieces Data")] [SerializeField]
+       // private HeuristicValue _heuristicValue;
+       
         [Header("Pieces Data")]
         [SerializeField] private Piece blackPawn;
         [SerializeField] private Piece whitePawn;
@@ -33,8 +34,10 @@ namespace Handlers
         [Header("Matrix")]
         public Piece[,] Pieces;
         public GameObject[,] PiecesDisplay;
-        
-        
+
+        public int NumberOfNode;
+        public Node Node;
+        public GameManager GameManager;
 
         private void Start()
         {
@@ -77,18 +80,12 @@ namespace Handlers
                         newPiece = Instantiate(transparentPrefab, gridParent);
                         newPiece.GetComponent<PieceHandler>().SetupTransparent(new Vector2Int(i, j));
                     }
-                    PiecesDisplay[i, j] = newPiece;
                     
+                    PiecesDisplay[i, j] = newPiece;
                 }
             }
             IsEndGame();
         }
-        public void GetHeuristicValue()
-        {
-            
-        }
-        
-        
         
         public void ResetMatrix()
         {
@@ -150,92 +147,4 @@ namespace Handlers
             }
         }
     }
-    
-    public class Node
-    {
-        // [,] = tableau à deux vecteur. ( tableau 2d )
-        public Piece[,] Pieces;
-        public bool IsWhiteTurn;
-        public Node() {}
-        
-        public Node(Piece[,] pieces, bool isWhiteTurn)
-        {
-            Pieces = pieces;
-            IsWhiteTurn = isWhiteTurn;
-        }
-
-        public bool IsTerminal()
-        {
-            return false;
-        }
-
-        public int HeursticValue()
-        {
-            int WhiteValue = 0;
-            int BlackValue = 0;
-            int HeuristicValue = 0;
-            
-            if (Pieces == null)
-            {
-                Debug.LogError("La liste _boardsHandler.Pieces est null!");
-            }
-
-            foreach (Piece piece in Pieces)
-            {
-                if (piece != null)
-                {
-                    if (piece.isWhite)
-                    {
-                        WhiteValue += piece.Point;
-                    }
-                    else
-                    { 
-                        BlackValue += piece.Point;
-                    }
-                }
-            }
-            
-            HeuristicValue = WhiteValue -= BlackValue;
-            Debug.Log(HeuristicValue);
-            return HeuristicValue;
-        }
-
-        // public List<Node> Children()
-        // {
-        //     List<Node> children = new List<Node>();
-        //     // Pour chaque movement possible
-        //     Piece[,] pieces = CreateCopy();
-        //     Node node = new Node(pieces, false);
-        //     MovePiece(node.Pieces);
-        //     children.Add(node);
-        // }
-
-        public Piece[,] MovePiece(Piece[,] pieces, Piece piece, Vector2Int from, Vector2Int to)
-        {
-            // Déplacement de la piece sur le pieces
-            return pieces;
-        }
-
-        private Piece[,] CreateCopy()
-        {
-            if (Pieces == null) return null;
-
-            int rows = Pieces.GetLength(0);
-            int cols = Pieces.GetLength(1);
-            Piece[,] newPieces = new Piece[rows, cols];
-
-            for (int row = 0; row < rows; row++)
-            {
-                for (int col = 0; col < cols; col++)
-                {
-                    if (Pieces[row, col] != null)
-                    {
-                        newPieces[row, col] = Pieces[row, col];
-                    }
-                }
-            }
-
-            return newPieces;
-        }
-    }
-}
+} 
