@@ -57,13 +57,13 @@ namespace Handlers
             
             Pieces = new Piece[,]
             {
-                {null ,null ,null ,null ,null ,null ,null ,null},
-                { blackKnight, null, null, null, null, null, null, blackKing },
-                { null, null, blackKnight, blackBishop, null, null,null , blackQueen },
-                { blackBishop, null, blackRook, null, null, null, blackRook, null },
-                { whiteRook, null, null, null, whiteQueen, null, null, null },
-                { null, null, null, null, whiteKing, null, whiteBishop, null },
-                { null, null, whiteRook, null, null, null, null, null },
+                {null ,null ,whiteKing ,null ,null ,null ,null ,null},
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null,null , null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, whiteBishop, null, null, null, null },
+                { null, null, whiteRook, blackKing, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
                 {null , null, null,null ,null ,null ,null ,null  },
             };
             DisplayMatrix();

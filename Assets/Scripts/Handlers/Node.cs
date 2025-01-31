@@ -9,14 +9,15 @@ namespace Handlers
         // [,] = tableau à deux vecteur. ( tableau 2d )
         public Piece[,] Pieces;
         public bool IsWhiteTurn;
+        public bool IsWhiteThinking;
         public int Depth = 2;
-        // public Vector2Int Position;
         
         // Constructeur
-        public Node(Piece[,] pieces, bool isWhiteTurn)
+        public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
         {
             Pieces = (Piece[,]) pieces.Clone();
             IsWhiteTurn = isWhiteTurn;
+            IsWhiteThinking = isWhiteThinking;
         }
 
         public Node(Node parentNode, Vector2Int fromMove, Vector2Int toMove)
@@ -54,9 +55,10 @@ namespace Handlers
                     }
                 }
             }
+            
+            if (IsWhiteThinking) HeuristicValue = WhiteValue - BlackValue;
+            else HeuristicValue = BlackValue - WhiteValue;
 
-            HeuristicValue = WhiteValue -= BlackValue;
-            //Debug.Log(HeuristicValue);
             return HeuristicValue;
         }
 
@@ -77,20 +79,9 @@ namespace Handlers
                         
                         foreach (Vector2Int movement in availableMovement)
                         { 
-                            Node node = new Node(Pieces, false);
+                            Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
                             node.MovePiece(node.Pieces, piece, position,movement);
                             children.Add(node);
-                            Debug.Log(node.HeursticValue() + " : " + piece);
-                            
-                            // for (int i = 0; i < Depth; i++)
-                            // {
-                            //     foreach (Node child in children)
-                            //     {
-                            //         Children();
-                            //         Debug.Log("child" + child.HeursticValue());
-                            //     }
-                            // }
-                            //Debug.Log(node);
                         }
                         
                         // Position = position;
@@ -98,34 +89,15 @@ namespace Handlers
                 }
             }
             return children;
-            // instentie ine list de node qui s'appelle children
-
-            // Pour chaque piece sur pieces
-            // recuperer les mouvements disponible de la piece
-            // pour chaque mouvement disponible
-            // créer une copy de pieces avec le mouvement fait
-            // ajoute cette copy a children
-
-
-
-            // List<Node> children = new List<Node>();
-            // // Pour chaque movement possible
-            // Piece[,] pieces = CreateCopy();
-            // Node node = new Node(pieces, false);
-            // MovePiece(node.Pieces, node.IsWhiteTurn);
-            // children.Add(node);
         }
 
         public Piece[,] MovePiece(Piece[,] pieces, Piece piece, Vector2Int from, Vector2Int to)
         {
-            // Déplacement de la piece sur le pieces
-            Piece NewPiece = piece;
-            //Debug.Log("<color=Yellow> Piece </color>"+ Pieces[from.x, from.y] + " De " + from.x + "," + from.y +" à " + to.x + "," + to.y);
-            //Debug.Log("<color=green> new piece </color>" + NewPiece + "de" +  pieces[from.x, from.y] +" à "+ pieces[to.x, to.y]);
+            Piece NewPiece = Pieces[from.x, from.y];
+            pieces[to.x, to.y] = NewPiece;
             pieces[from.x, from.y] = null;
-            //pieces[to.x, to.y]  = NewPiece;
-            
-            //Debug.Log(OldPiece.name + "Bouge de" + from + "à" + to.x + "," + to.y);
+            HeursticValue();
+            Debug.Log("<color=Yellow> Piece </color>"+ Pieces[from.x, from.y] + piece.name + " De " + from.x + "," + from.y +" à " + to.x + "," + to.y + " valeur de " + HeursticValue());
             
             return pieces;
         }

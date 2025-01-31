@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Handlers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
 
@@ -8,6 +10,7 @@ namespace Game
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
+        public AiHandler AiHandler;
         [Header("Selected Piece")]
         public PieceHandler lastClickGameObject;
 
@@ -29,29 +32,34 @@ namespace Game
             {
                 SceneManager.LoadScene(0);
             }
-
-            if (Input.GetButtonDown("Fire2"))
-            {
-                Debug.Log("change");
-            }
-        }
-
-        private void Start()
-        {
-            
-        }
-
-        private void TestGame()
-        {
-            
         }
         
         [ContextMenu("Think")]
         private void Think()
         {
-            Node currentNode = new Node(BoardsHandler.Instance.Pieces, true);
-            Debug.Log(currentNode.HeursticValue());
-            Debug.Log(currentNode.Children());
+            List<int> values = new List<int>();
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn);
+            foreach (Node child in currentNode.Children())
+            { 
+                int max = AiHandler.MinMax(child, 1, !child.IsWhiteTurn); 
+                
+                
+                values.Add(AiHandler.MinMax(child, 1, !child.IsWhiteTurn));
+                Debug.Log(" heur " + values.Count);
+                
+                int bestValue = int.MinValue;
+                foreach (int value in values)
+                {
+                    if (value > bestValue)
+                    {
+                        //Debug.Log("Heuristic : " + value);
+                        bestValue = value;
+                    }
+                }
+                
+                Debug.Log("Heuristic : " + max + " child is ");
+                Debug.Log("<color=red> Heuristic best Value </color>" + bestValue);
+            }
         }
     }
 }
