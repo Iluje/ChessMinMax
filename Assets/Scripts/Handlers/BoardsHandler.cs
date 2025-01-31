@@ -43,16 +43,28 @@ namespace Handlers
         {
             Time.timeScale = 1;
             
+            // Pieces = new Piece[,]
+            // {
+            //     { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
+            //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+            //     { null, null, null, null, null, null,null , null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
+            //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
+            // };
+            
             Pieces = new Piece[,]
             {
-                { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
-                { blackPawn, null, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
-                { null, null, null, null, null, null, whiteQueen, null },
-                { null, blackPawn, null, null, null, null, null, null },
-                { whitePawn, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
-                { whiteRook, whiteKnight, whiteBishop, null, whiteKing, whiteBishop, whiteKnight, whiteRook },
+                {null ,null ,null ,null ,null ,null ,null ,null},
+                { blackKnight, null, null, null, null, null, null, blackKing },
+                { null, null, blackKnight, blackBishop, null, null,null , blackQueen },
+                { blackBishop, null, blackRook, null, null, null, blackRook, null },
+                { whiteRook, null, null, null, whiteQueen, null, null, null },
+                { null, null, null, null, whiteKing, null, whiteBishop, null },
+                { null, null, whiteRook, null, null, null, null, null },
+                {null , null, null,null ,null ,null ,null ,null  },
             };
             DisplayMatrix();
         }

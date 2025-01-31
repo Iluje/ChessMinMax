@@ -1,18 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
-using Handlers;
+using System;
 using UnityEngine;
 
-public class AiHandler : MonoBehaviour
+namespace Handlers
 {
-   public int Depth = 0;
-   public bool IsTerminal;
-
-   public void MiniMax(Node node,int depth, bool maximizing)
+   public class AiHandler : MonoBehaviour
    {
-      if (Depth == 0 || !IsTerminal)
+      public int Depth = 0;
+      public bool IsTerminal;
+
+      public int MinMax(Node node,int depth, bool maximizing)
       {
-         
+         if (depth == 0 || node.IsTerminal())
+         {
+            node.HeursticValue();
+         }
+
+         if (!maximizing)
+         {
+            int Value = int.MinValue;
+            foreach (Node child in node.Children())
+            {
+               int max = MinMax(child, depth - 1, false);
+            }
+            return Value;
+         }
+         else
+         {
+            int Value = int.MaxValue;
+            foreach (Node child in node.Children())
+            {
+               int min = MinMax(child, depth - 1, true);
+            }
+            return Value;
+         }
       }
    }
 }

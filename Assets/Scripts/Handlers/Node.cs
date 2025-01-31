@@ -9,6 +9,7 @@ namespace Handlers
         // [,] = tableau à deux vecteur. ( tableau 2d )
         public Piece[,] Pieces;
         public bool IsWhiteTurn;
+        public int Depth = 2;
         // public Vector2Int Position;
         
         // Constructeur
@@ -80,8 +81,18 @@ namespace Handlers
                             node.MovePiece(node.Pieces, piece, position,movement);
                             children.Add(node);
                             Debug.Log(node.HeursticValue() + " : " + piece);
+                            
+                            // for (int i = 0; i < Depth; i++)
+                            // {
+                            //     foreach (Node child in children)
+                            //     {
+                            //         Children();
+                            //         Debug.Log("child" + child.HeursticValue());
+                            //     }
+                            // }
                             //Debug.Log(node);
                         }
+                        
                         // Position = position;
                     } 
                 }
