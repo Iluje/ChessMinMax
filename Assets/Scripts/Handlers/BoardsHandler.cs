@@ -46,13 +46,13 @@ namespace Handlers
             Pieces = new Piece[,]
             {
                 { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
-                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+                { blackPawn, null, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+                { null, null, null, null, null, null, whiteQueen, null },
+                { null, blackPawn, null, null, null, null, null, null },
+                { whitePawn, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
-                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
+                { null, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
+                { whiteRook, whiteKnight, whiteBishop, null, whiteKing, whiteBishop, whiteKnight, whiteRook },
             };
             DisplayMatrix();
         }

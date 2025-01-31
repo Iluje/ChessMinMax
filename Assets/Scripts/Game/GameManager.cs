@@ -43,7 +43,7 @@ namespace Game
 
         private void TestGame()
         {
-            Node currentNode = new Node(BoardsHandler.Instance.Pieces, true);
+            
         }
         
         [ContextMenu("Think")]

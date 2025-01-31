@@ -61,32 +61,32 @@ namespace Handlers
 
         public List<Node> Children()
         {
-            //List<Node> Childrens = new List<Node>();
+            List<Node> children = new List<Node>();
             for (int x = 0; x < Pieces.GetLength(0); x++)
             { 
                 for (int y = 0; y < Pieces.GetLength(1); y++)
                 {
-                    // Piece piece = Pieces[x, y];
-                    // if (piece != null) //&& piece.isWhite == IsWhiteTurn)
-                    // { 
-                    //     Debug.Log(Pieces[x, y].name);
-                    //         
-                    //     Vector2Int position = new Vector2Int(x, y);
-                    //     List<Vector2Int> availableMovement = piece.AvailableMovements(position);
-                    //     
-                    //     foreach (Vector2Int movement in availableMovement)
-                    //     { 
-                    //         Node node = new Node(Pieces, false);
-                    //         //Childrens.Add(node);
-                    //         node.MovePiece(node.Pieces, piece, position,movement); 
-                    //         MovePiece(Pieces, piece,position, movement );
-                    //     }
-                    //         // Position = position;
-                    // } 
+                    Piece piece = Pieces[x, y];
+                    if (piece != null) //&& piece.isWhite == IsWhiteTurn)
+                    { 
+                       // Debug.Log(Pieces[x, y].name);
+                            
+                        Vector2Int position = new Vector2Int(x, y);
+                        List<Vector2Int> availableMovement = piece.AvailableMovements(position);
+                        
+                        foreach (Vector2Int movement in availableMovement)
+                        { 
+                            Node node = new Node(Pieces, false);
+                            node.MovePiece(node.Pieces, piece, position,movement);
+                            children.Add(node);
+                            Debug.Log(node.HeursticValue() + " : " + piece);
+                            //Debug.Log(node);
+                        }
+                        // Position = position;
+                    } 
                 }
             }
-
-            return Children();
+            return children;
             // instentie ine list de node qui s'appelle children
 
             // Pour chaque piece sur pieces
@@ -109,7 +109,7 @@ namespace Handlers
         {
             // Déplacement de la piece sur le pieces
             Piece NewPiece = piece;
-            Debug.Log("<color=Yellow> New piece </color>"+ " De " + from.x + "," + from.y +" à " + to.x + "," + to.y);
+            //Debug.Log("<color=Yellow> Piece </color>"+ Pieces[from.x, from.y] + " De " + from.x + "," + from.y +" à " + to.x + "," + to.y);
             //Debug.Log("<color=green> new piece </color>" + NewPiece + "de" +  pieces[from.x, from.y] +" à "+ pieces[to.x, to.y]);
             pieces[from.x, from.y] = null;
             //pieces[to.x, to.y]  = NewPiece;
