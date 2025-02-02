@@ -32,6 +32,11 @@ namespace Game
             {
                 SceneManager.LoadScene(0);
             }
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Think();
+            }
         }
         
         [ContextMenu("Think")]
@@ -56,7 +61,7 @@ namespace Game
                 
                 // créer une variable int qui serra égal à - l'infini
                 int bestValue = int.MinValue;
-                
+                Node bestChild = null;
                 // pour chaque valeur, dans Values
                 foreach (int value in values)
                 {
@@ -65,17 +70,23 @@ namespace Game
                     {
                         // alors la value est égal à la meilleur valeur
                         bestValue = value;
+                        bestChild = child;
+                        
+                        Debug.Log("<color=red> Valeur du best child </color>" + bestChild.Value);
                     }
                 }
                 
+                BoardsHandler.Instance.ResetMatrix();
+                BoardsHandler.Instance.Pieces = bestChild.Pieces;
                 BoardsHandler.Instance.DisplayMatrix();
                 
-                Debug.Log("Heuristic : " + max + " child is ");
-                Debug.Log("<color=red> Heuristic best Value </color>" + bestValue + " tour des joueurs blanc ?" + isWhiteTurn);
-                BoardsHandler.Instance.ResetMatrix();
-                BoardsHandler.Instance.Pieces = currentNode.Pieces;
-                BoardsHandler.Instance.DisplayMatrix();
-                Debug.Log("<color=green> Board count  </color> " + BoardsHandler.Instance.Pieces);
+                //BoardsHandler.Instance.DisplayMatrix();
+                
+                //Debug.Log("Heuristic : " + max + " child is ");
+                //Debug.Log("<color=red> Heuristic best Value </color>" + bestValue + " tour des joueurs blanc ?" + isWhiteTurn);
+                //BoardsHandler.Instance.Pieces = bestChild.Pieces;
+                
+                //Debug.Log("<color=green> Board count  </color> " + BoardsHandler.Instance.Pieces);
             }
         }
     }

@@ -80,7 +80,7 @@ namespace Handlers
             
             // appeler la methode HeursticValue.
             HeursticValue();
-            Debug.Log("<color=Yellow> Piece </color>"+ Pieces[from.x, from.y] + piece.name + " De " + from.x + "," + from.y +" à " + to.x + "," + to.y + " valeur de " + HeursticValue());
+            //Debug.Log("<color=Yellow> Piece </color>"+ Pieces[from.x, from.y] + piece.name + " De " + from.x + "," + from.y +" à " + to.x + "," + to.y + " valeur de " + HeursticValue());
             
             return pieces;
         }
