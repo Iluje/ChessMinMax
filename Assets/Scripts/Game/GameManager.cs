@@ -49,11 +49,16 @@ namespace Game
             Node bestChild = null;
             
             
+            
             foreach (Node child in children)
             {
-                int value = child.HeursticValue();
+                //int value = child.HeursticValue();
+                int value = AiHandler.MinMax(child, 2, isWhiteTurn);
+                
+                
                 if (value > bestValue)
                 {
+                    Debug.Log("valeur" + value + " tour du blanc ?" + isWhiteTurn);
                     bestValue = value;
                     bestChild = child;
                 }
