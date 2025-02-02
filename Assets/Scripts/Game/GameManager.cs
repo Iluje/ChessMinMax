@@ -37,28 +37,45 @@ namespace Game
         [ContextMenu("Think")]
         private void Think()
         {
+            // créer une liste de int
             List<int> values = new List<int>();
+            
+            // récuper le node actuelle du plateau avec pour paramètre, Le plateau, qui joue le tour, et qui pense.
             Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn);
+            
+            // Pour chaque enfant de ce Node
             foreach (Node child in currentNode.Children())
             { 
+                // stocker dans un int, le résulta de la mehide MinMax
                 int max = AiHandler.MinMax(child, 1, !child.IsWhiteTurn); 
                 
+                // l'ajouter dans la liste
+                values.Add(max);
                 
-                values.Add(AiHandler.MinMax(child, 1, !child.IsWhiteTurn));
                 Debug.Log(" heur " + values.Count);
                 
+                // créer une variable int qui serra égal à - l'infini
                 int bestValue = int.MinValue;
+                
+                // pour chaque valeur, dans Values
                 foreach (int value in values)
                 {
+                    // si la value est supèrieur a la précédente 
                     if (value > bestValue)
                     {
-                        //Debug.Log("Heuristic : " + value);
+                        // alors la value est égal à la meilleur valeur
                         bestValue = value;
                     }
                 }
                 
+                BoardsHandler.Instance.DisplayMatrix();
+                
                 Debug.Log("Heuristic : " + max + " child is ");
-                Debug.Log("<color=red> Heuristic best Value </color>" + bestValue);
+                Debug.Log("<color=red> Heuristic best Value </color>" + bestValue + " tour des joueurs blanc ?" + isWhiteTurn);
+                BoardsHandler.Instance.ResetMatrix();
+                BoardsHandler.Instance.Pieces = currentNode.Pieces;
+                BoardsHandler.Instance.DisplayMatrix();
+                Debug.Log("<color=green> Board count  </color> " + BoardsHandler.Instance.Pieces);
             }
         }
     }
