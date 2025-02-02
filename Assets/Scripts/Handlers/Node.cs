@@ -10,8 +10,7 @@ namespace Handlers
         public Piece[,] Pieces;
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
-        public int Depth = 2;
-        public int Value;
+        public int Depth = 1;
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
@@ -113,8 +112,7 @@ namespace Handlers
             
             if (IsWhiteThinking) HeuristicValue = WhiteValue - BlackValue;
             else HeuristicValue = BlackValue - WhiteValue;
-
-            Value = HeuristicValue;
+            
             return HeuristicValue;
         }
         
