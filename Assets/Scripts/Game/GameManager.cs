@@ -51,7 +51,7 @@ namespace Game
             foreach (Node child in children)
             {
                 //int value = child.HeursticValue();
-                int value = AiHandler.MinMax(child, 3, false);
+                int value = AiHandler.MinMax(child, 2, false);
                 
                 
                 if (value > bestValue)

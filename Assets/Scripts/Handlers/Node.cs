@@ -40,8 +40,7 @@ namespace Handlers
                             Piece piece = Pieces[x, y];
                             Vector2Int position = new Vector2Int(x, y);
                             List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
-                            Debug.Log(piece.name + " : " + availableMovement.Count);
-                        
+                            
                             foreach (Vector2Int movement in availableMovement)
                             { 
                                 Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
