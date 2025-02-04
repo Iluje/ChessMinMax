@@ -43,26 +43,25 @@ namespace Game
         private void Think()
         {
             Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn);
-
-            List<Node> children = currentNode.Children();
+            
+            List<Node> children = currentNode.Children(); 
             int bestValue = int.MinValue;
             Node bestChild = null;
             
-            
-            
             foreach (Node child in children)
             {
-                int value = child.HeursticValue();
-                //int value = AiHandler.MinMax(child, 2, isWhiteTurn);
+                //int value = child.HeursticValue();
+                int value = AiHandler.MinMax(child, 3, false);
                 
                 
                 if (value > bestValue)
                 {
-                    Debug.Log("valeur" + value + " tour du blanc ?" + isWhiteTurn);
+                    // Debug.Log("valeur" + value + " tour du blanc ?" + isWhiteTurn);
                     bestValue = value;
                     bestChild = child;
                 }
             }
+            
             BoardsHandler.Instance.ResetMatrix();
             BoardsHandler.Instance.Pieces = bestChild.Pieces;
             BoardsHandler.Instance.DisplayMatrix();

@@ -14,7 +14,7 @@ namespace Pieces
         };
         
         
-        public override List<Vector2Int> AvailableMovements(Vector2Int position)
+        public override List<Vector2Int> AvailableMovements(Vector2Int position, Piece[,] board)
         {
             List<Vector2Int> movements = new List<Vector2Int>();
             
@@ -27,12 +27,12 @@ namespace Pieces
                 {
                     continue;
                 }
-                if (BoardsHandler.Instance.Pieces[testDirection.x, testDirection.y] == null)
+                if (board[testDirection.x, testDirection.y] == null)
                 { 
                     movements.Add(new Vector2Int(testDirection.x, testDirection.y)); 
                     continue;
                 } 
-                if (BoardsHandler.Instance.Pieces[testDirection.x, testDirection.y].isWhite != isWhite)
+                if (board[testDirection.x, testDirection.y].isWhite != isWhite)
                 { 
                     movements.Add(new Vector2Int(testDirection.x, testDirection.y)); 
                     continue;

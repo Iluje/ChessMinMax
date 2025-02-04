@@ -17,7 +17,7 @@ namespace Pieces
             new Vector2Int(-1, 1), new Vector2Int(-1, -1)
         };
 
-        public override List<Vector2Int> AvailableMovements(Vector2Int position)
+        public override List<Vector2Int> AvailableMovements(Vector2Int position, Piece[,] board)
         {
             List<Vector2Int> movements = new List<Vector2Int>();
 
@@ -29,10 +29,9 @@ namespace Pieces
                 {
                     for (i = position.x + 1; i <= position.x + 2; i++)
                     {
-                        if (BoardsHandler.Instance.Pieces[i, position.y] == null)
+                        if (board[i, position.y] == null)
                         {
                             movements.Add(new Vector2Int(i, position.y));
-                            continue;
                         }
                         else
                         {
@@ -44,7 +43,7 @@ namespace Pieces
                 {
                     for (i = position.x + 1; i <= position.x + 1; i++)
                     {
-                        if (BoardsHandler.Instance.Pieces[i, position.y] == null)
+                        if (board[i, position.y] == null)
                         {
                             movements.Add(new Vector2Int(i, position.y));
                             continue;
@@ -65,12 +64,12 @@ namespace Pieces
                         continue;
                     }
 
-                    if (BoardsHandler.Instance.Pieces[testDirection.x, testDirection.y] == null)
+                    if (board[testDirection.x, testDirection.y] == null)
                     {
                         continue;
                     }
 
-                    if (BoardsHandler.Instance.Pieces[testDirection.x, testDirection.y].isWhite != isWhite)
+                    if (board[testDirection.x, testDirection.y].isWhite != isWhite)
                     {
                         movements.Add(new Vector2Int(testDirection.x, testDirection.y));
                         continue;
@@ -85,7 +84,7 @@ namespace Pieces
                 {
                     for (i = position.x - 1; i >= position.x - 2; i--)
                     {
-                        if (BoardsHandler.Instance.Pieces[i, position.y] == null)
+                        if (board[i, position.y] == null)
                         {
                             movements.Add(new Vector2Int(i, position.y));
                             continue;
@@ -100,7 +99,7 @@ namespace Pieces
                 {
                     for (i = position.x - 1; i >= position.x - 1; i--)
                     {
-                        if (BoardsHandler.Instance.Pieces[i, position.y] == null)
+                        if (board[i, position.y] == null)
                         {
                             movements.Add(new Vector2Int(i, position.y));
                             continue;
@@ -121,12 +120,12 @@ namespace Pieces
                         continue;
                     }
 
-                    if (BoardsHandler.Instance.Pieces[testDirection.x, testDirection.y] == null)
+                    if (board[testDirection.x, testDirection.y] == null)
                     {
                         continue;
                     }
 
-                    if (BoardsHandler.Instance.Pieces[testDirection.x, testDirection.y].isWhite != isWhite)
+                    if (board[testDirection.x, testDirection.y].isWhite != isWhite)
                     {
                         movements.Add(new Vector2Int(testDirection.x, testDirection.y));
                         continue;

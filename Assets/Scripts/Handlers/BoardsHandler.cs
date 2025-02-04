@@ -55,16 +55,28 @@ namespace Handlers
             //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
             // };
             
+            // Pieces = new Piece[,]
+            // {
+            //     {null ,null ,whiteKing ,null ,null ,null ,null ,null},
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null,null , null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, whiteBishop, null, null, null, null },
+            //     { null, null, whiteRook, blackKing, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     {null , null, null,null ,null ,null ,null ,null  },
+            // };
+            
             Pieces = new Piece[,]
             {
-                {null ,null ,whiteKing ,null ,null ,null ,null ,null},
                 { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null,null , null },
                 { null, null, null, null, null, null, null, null },
-                { null, null, null, whiteBishop, null, null, null, null },
-                { null, null, whiteRook, blackKing, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
-                {null , null, null,null ,null ,null ,null ,null  },
+                { null, null, null, null, null, null, null, null },
+                { null, whiteBishop, null, null, null, null, null, null },
+                { whiteKnight, whiteKnight, null, null, null, null, null, null },
+                { blackPawn, blackKing, null, whiteKing, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
             };
             DisplayMatrix();
         }

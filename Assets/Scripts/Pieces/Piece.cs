@@ -8,7 +8,7 @@ namespace Pieces
         public Sprite sprite;
         public bool isWhite;
         public int Point;
-        public abstract List<Vector2Int> AvailableMovements(Vector2Int position);
+        public abstract List<Vector2Int> AvailableMovements(Vector2Int position, Piece[,] board);
         // dans le paramettre mettre la position de la piece
     }
 }

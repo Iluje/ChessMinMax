@@ -42,7 +42,7 @@ namespace Handlers
                     BoardsHandler.Instance.ResetMatrix();
                     BoardsHandler.Instance.DisplayMatrix();
             
-                    List<Vector2Int> availableMovements = Piece.AvailableMovements(_position);
+                    List<Vector2Int> availableMovements = Piece.AvailableMovements(_position, BoardsHandler.Instance.Pieces);
                    
                     
                     foreach (Vector2Int availableMovement in availableMovements)

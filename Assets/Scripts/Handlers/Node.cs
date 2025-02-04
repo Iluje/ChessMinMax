@@ -10,7 +10,7 @@ namespace Handlers
         public Piece[,] Pieces;
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
-        public int Depth = 1;
+        public int HeuristicValue;
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
@@ -27,42 +27,46 @@ namespace Handlers
 
         public List<Node> Children()
         {
-            // Créer une liste de Node qui serront appeler Children
             List<Node> children = new List<Node>();
             
-            // parcourir la liste multidimentionelle sur l'axe X et Y et s'arrêter au moment ou la liste est fini.
             for (int x = 0; x < Pieces.GetLength(0); x++)
             { 
                 for (int y = 0; y < Pieces.GetLength(1); y++)
                 {
-                    // créer une piece de type Piece à la position qui est acutellement parcourue
-                    
-                    Piece piece = Pieces[x, y];
-                    if (piece != null) //&& piece.isWhite == IsWhiteTurn)
-                    { 
+                    if (Pieces[x, y] != null)
+                    {
+                        if (Pieces[x, y].isWhite == IsWhiteTurn)
+                        {
+                            Piece piece = Pieces[x, y];
+                            Vector2Int position = new Vector2Int(x, y);
+                            List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
+                            Debug.Log(piece.name + " : " + availableMovement.Count);
                         
-                        // Sur une liste de vector2Int qui s'appelle availableMovement, je lui dit qu'elle est égal à piece.AvailableMovements(position);
-                        
-                        Vector2Int position = new Vector2Int(x, y);
-                        List<Vector2Int> availableMovement = piece.AvailableMovements(position);
-                        
-                        foreach (Vector2Int movement in availableMovement)
-                        { 
-                            // pour chaque Vector2int ( movement ) créer un node à l'aide du constructeur ( une copie enfant du Node)  .
-                            // Comme paramètre du node enfant créer, je lui le tableau 2D, /// le reste j'ai pas compris pk.
-                            Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
-                            
-                            // j'appel la methode MovePiece avec pour le tableau 2d, la position de la piece, et le movement possible.
-                            node.MovePiece(node.Pieces, piece, position,movement);
-                            
-                            // dans la liste d'enfant du node, je lui ajoute le node, une fois le movePiece effectué.
-                            children.Add(node);
-                            
-                            // résulta, j'ai un Node, ce Node possède une liste de node enfant avec un mouvement effectuer pour chaque enfant.
+                            foreach (Vector2Int movement in availableMovement)
+                            { 
+                                Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
+                                node.MovePiece(node.Pieces, piece, position,movement);
+                                
+                                node.HeuristicValue = node.HeursticValue();
+                                children.Add(node);
+                            }
                         }
-                        
-                        // Position = position;
-                    } 
+                    }
+                    
+                    
+                    // Piece piece = Pieces[x, y];
+                    // if (piece != null)
+                    // { 
+                    //     Vector2Int position = new Vector2Int(x, y);
+                    //     List<Vector2Int> availableMovement = piece.AvailableMovements(position);
+                    //     
+                    //     foreach (Vector2Int movement in availableMovement)
+                    //     { 
+                    //         Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
+                    //         node.MovePiece(node.Pieces, piece, position,movement);
+                    //         children.Add(node);
+                    //     }
+                    // } 
                 }
             }
             return children;
