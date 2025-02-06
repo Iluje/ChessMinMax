@@ -94,12 +94,12 @@ namespace Handlers
             // Pieces = new Piece[,]
             // {
             //     { null, null, null, null, null, null, null, null },
-            //     { null, whitePawn, null, null, null, null, null, null },
+            //     { null, blackQueen, null, null, null, null, null, null },
             //     { null, null, null, null, null, null, null, null },
             //     { null, null, null, null, null, null, null, null },
             //     { null, null, null, null, null, null, null, null },
             //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, blackPawn, null, null },
+            //     { null, null, null, null, null, whiteQueen, null, null },
             //     { null, null, null, null, null, null, null, null },
             // };
             
@@ -144,7 +144,7 @@ namespace Handlers
                     PiecesDisplay[i, j] = newPiece;
                 }
             }
-            //IsEndGame();
+            IsEndGame();
         }
         
         public void ResetMatrix()
@@ -173,38 +173,38 @@ namespace Handlers
             }
         }
 
-        // public void IsEndGame()
-        // {
-        //     GameManager.Instance.isBlackKing = false;
-        //     GameManager.Instance.isWhiteKing = false;
-        //     
-        //     for (int i = 0; i < Pieces.GetLength(0); i++)
-        //     {
-        //         for (int j = 0; j < Pieces.GetLength(1); j++)
-        //         {
-        //             if (Pieces[i, j] == blackKing)
-        //             {
-        //                 GameManager.Instance.isBlackKing = true;
-        //             }
-        //             if (Pieces[i, j] == whiteKing)
-        //             {
-        //                 GameManager.Instance.isWhiteKing = true;
-        //             }
-        //         }
-        //     }
-        //
-        //     if (GameManager.Instance.isBlackKing == false)
-        //     {
-        //         Time.timeScale = 0;
-        //         GameManager.Instance.endGamePanel.SetActive(true);
-        //         GameManager.Instance.endGameText.text = " Victory White Player ! ";
-        //     }
-        //     if (GameManager.Instance.isWhiteKing == false)
-        //     {
-        //         Time.timeScale = 0;
-        //         GameManager.Instance.endGamePanel.SetActive(true);
-        //         GameManager.Instance.endGameText.text = " Victory Black Player ! ";
-        //     }
-        // }
+        public void IsEndGame()
+        {
+            GameManager.Instance.isBlackKing = false;
+            GameManager.Instance.isWhiteKing = false;
+            
+            for (int i = 0; i < Pieces.GetLength(0); i++)
+            {
+                for (int j = 0; j < Pieces.GetLength(1); j++)
+                {
+                    if (Pieces[i, j] == blackKing)
+                    {
+                        GameManager.Instance.isBlackKing = true;
+                    }
+                    if (Pieces[i, j] == whiteKing)
+                    {
+                        GameManager.Instance.isWhiteKing = true;
+                    }
+                }
+            }
+        
+            if (GameManager.Instance.isBlackKing == false)
+            {
+                Time.timeScale = 0;
+                GameManager.Instance.endGamePanel.SetActive(true);
+                GameManager.Instance.endGameText.text = " Victory White Player ! ";
+            }
+            if (GameManager.Instance.isWhiteKing == false)
+            {
+                Time.timeScale = 0;
+                GameManager.Instance.endGamePanel.SetActive(true);
+                GameManager.Instance.endGameText.text = " Victory Black Player ! ";
+            }
+        }
     }
 } 

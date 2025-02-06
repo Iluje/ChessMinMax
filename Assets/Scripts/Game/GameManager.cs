@@ -10,6 +10,8 @@ namespace Game
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
+        public int Depht;
+        
         public AiHandler AiHandler;
         [Header("Selected Piece")]
         public PieceHandler lastClickGameObject;
@@ -50,7 +52,7 @@ namespace Game
             
             foreach (Node child in children)
             {
-                int value = AiHandler.MinMax(child, 2, false);
+                int value = AiHandler.MinMax(child, Depht, false);
                 
                 if (value > bestValue)
                 {

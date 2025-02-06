@@ -33,7 +33,7 @@ namespace Pieces
             
             for (i = position.x + 1; i <= 7; i++) 
             { 
-                if (BoardsHandler.Instance.Pieces[i, position.y] == null)
+                if (board[i, position.y] == null)
                 { 
                     movements.Add(new Vector2Int(i, position.y)); 
                     continue;
