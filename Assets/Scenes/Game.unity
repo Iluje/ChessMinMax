@@ -1185,12 +1185,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea058a4e9f71ea43b7b8217bc5651be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Depht: 0
   AiHandler: {fileID: 311530436}
   lastClickGameObject: {fileID: 0}
   endGamePanel: {fileID: 831712229}
   endGameText: {fileID: 554317900}
   audioManager: {fileID: 941541264}
-  isWhiteTurn: 0
+  isWhiteTurn: 1
   isBlackKing: 1
   isWhiteKing: 1
 --- !u!1 &375304730
