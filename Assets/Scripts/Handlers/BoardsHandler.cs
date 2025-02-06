@@ -79,41 +79,30 @@ namespace Handlers
             //     {null , null, null,null ,null ,null ,null ,null  },
             // };
             
+            // Pieces = new Piece[,]
+            // {
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, whiteBishop, null, null, null, null, null, null },
+            //     { whiteKnight, whiteKnight, null, null, null, null, null, null },
+            //     { blackPawn, blackKing, null, whiteKing, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            // };
+            
             Pieces = new Piece[,]
             {
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, whiteBishop, null, null, null, null, null, null },
-                { whiteKnight, whiteKnight, null, null, null, null, null, null },
-                { blackPawn, blackKing, null, whiteKing, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
+                { blackRook, blackKnight, blackBishop, null, blackKing, blackBishop, null, blackRook },
+                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, null, null, blackPawn },       
+                { null, null, null, null, null, blackPawn, null, null },                                 
+                { null, null, null, whiteKnight, null, null, null, null },                             
+                { null, null, null, whitePawn, null, null, null, null },                                 
+                { null, null, null, null, whitePawn, null, null, null },                                
+                { whitePawn, whitePawn, whitePawn, null, null, whitePawn, whitePawn, whitePawn },       
+                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, null, whiteKnight, whiteRook }
             };
-            
-            // Pieces = new Piece[,]
-            // {
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, blackQueen, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, whiteQueen, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            // };
-            
-            // Pieces = new Piece[,]
-            // {
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, whiteBishop, whiteBishop, whiteBishop, null, null, null, null },
-            //     { null, whiteBishop, whiteRook, whiteBishop, null, null, null, null },
-            //     { null, whiteBishop, whiteBishop, whiteBishop, whiteBishop, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, blackKing, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            // };
+
             DisplayMatrix();
         }
 
@@ -131,7 +120,6 @@ namespace Handlers
                     
                     if (Pieces[i, j] != null)
                     {
-                        // Instancier un prefab Image pour chaque élément
                         newPiece = Instantiate(piecePrefab, gridParent);
                         newPiece.GetComponent<PieceHandler>().Setup(Pieces[i, j], new Vector2Int(i, j));
                     }

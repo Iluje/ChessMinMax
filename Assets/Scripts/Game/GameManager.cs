@@ -56,16 +56,13 @@ namespace Game
                 
                 if (value > bestValue)
                 {
-                    // Debug.Log("valeur" + value + " tour du blanc ?" + isWhiteTurn);
                     bestValue = value;
                     bestChild = child;
-                    //bestChild = children[Random.Range(0, children.Count)];
                 }
             }
-            
+
             BoardsHandler.Instance.ResetMatrix();
             BoardsHandler.Instance.Pieces = bestChild.Pieces;
-            //BoardsHandler.Instance.Pieces = children[Random.Range(0, children.Count)].Pieces;
             BoardsHandler.Instance.DisplayMatrix();
             isWhiteTurn = !isWhiteTurn;
 
