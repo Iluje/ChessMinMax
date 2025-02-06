@@ -50,20 +50,20 @@ namespace Game
             
             foreach (Node child in children)
             {
-                //int value = child.HeursticValue();
                 int value = AiHandler.MinMax(child, 2, false);
-                
                 
                 if (value > bestValue)
                 {
                     // Debug.Log("valeur" + value + " tour du blanc ?" + isWhiteTurn);
                     bestValue = value;
                     bestChild = child;
+                    //bestChild = children[Random.Range(0, children.Count)];
                 }
             }
             
             BoardsHandler.Instance.ResetMatrix();
             BoardsHandler.Instance.Pieces = bestChild.Pieces;
+            //BoardsHandler.Instance.Pieces = children[Random.Range(0, children.Count)].Pieces;
             BoardsHandler.Instance.DisplayMatrix();
             isWhiteTurn = !isWhiteTurn;
 

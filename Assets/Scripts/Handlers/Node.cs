@@ -19,12 +19,6 @@ namespace Handlers
             IsWhiteTurn = isWhiteTurn;
             IsWhiteThinking = isWhiteThinking;
         }
-
-        public Node(Node parentNode, Vector2Int fromMove, Vector2Int toMove)
-        {
-            
-        }
-
         public List<Node> Children()
         {
             List<Node> children = new List<Node>();
@@ -42,7 +36,7 @@ namespace Handlers
                             List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
                             
                             foreach (Vector2Int movement in availableMovement)
-                            { 
+                            {
                                 Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
                                 node.MovePiece(node.Pieces, piece, position,movement);
                                 
