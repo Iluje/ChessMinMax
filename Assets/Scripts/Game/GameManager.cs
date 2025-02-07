@@ -64,6 +64,7 @@ namespace Game
             BoardsHandler.Instance.ResetMatrix();
             BoardsHandler.Instance.Pieces = bestChild.Pieces;
             BoardsHandler.Instance.DisplayMatrix();
+            Debug.Log(bestChild.HeuristicValue);
             isWhiteTurn = !isWhiteTurn;
 
             //BoardsHandler.Instance.DisplayMatrix();

@@ -11,6 +11,7 @@ namespace Handlers
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
         public int HeuristicValue;
+        public Dictionary<Piece, int[,]> Bonus; 
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
@@ -75,13 +76,20 @@ namespace Handlers
             pieces[from.x, from.y] = null;
             
             // appeler la methode HeursticValue.
-            HeursticValue();
-            //Debug.Log("<color=Yellow> Piece </color>"+ Pieces[from.x, from.y] + piece.name + " De " + from.x + "," + from.y +" à " + to.x + "," + to.y + " valeur de " + HeursticValue());
+            //HeursticValue();
             
             return pieces;
         }
         
         public int HeursticValue()
+        {
+            return HeuristicPiecesValue() + HeuristicPlacementValue();
+        }
+
+        /**
+         * Méthode d'évaluation d'heuristic pour les valeurs de pieces
+         */
+        private int HeuristicPiecesValue()
         {
             int WhiteValue = 0;
             int BlackValue = 0;
@@ -111,6 +119,41 @@ namespace Handlers
             else HeuristicValue = BlackValue - WhiteValue;
             
             return HeuristicValue;
+        }
+
+        private int HeuristicPlacementValue()
+        {
+            // SOLUTION 1
+            // J'ai créer un dictionnaire, avec dedans une Piece, et un tableau 2D.
+            // récuperer la position de la piece avec un double for. 
+            // une fois les position récuperer, prendre la position et regarder quel est le type de la piece.
+            // pour récuperer le type de la piece, il faut utiliser la fonction GetType() Exemple :
+            //node.Pieces[x, y].GetType();
+            // si c'est un Pawn, alors lui ajouter le bonus du tableau à la même position acutelle de la piece sur le jeu
+            
+            // SOLUTION 2
+            // J'ai créer un dictionnaire, avec dedans une Piece, et un tableau 2D.
+            // récuperer la position de la piece sur le node.
+            // si la piece est == à BoardHandler.Instance.(nom de la piece)
+            // alors il va se référer au tableau 2D qui possède comme piece Le même nom de la piece.
+
+            return 0;
+        }
+
+        public int CalculatePlacementValue(Piece piece, Vector2Int position)
+        {
+           
+            Debug.Log( "CalculatePlacementValue" + position + " : " + piece.name);
+            // if (piece.name == " BlackRook")
+            // {
+            //     Bonus = new Dictionary<Piece, int[,]>()
+            //     {
+            //     
+            //     }
+            // }
+            
+                
+        return 0;
         }
         
         public bool IsTerminal()

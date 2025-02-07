@@ -13,18 +13,18 @@ namespace Handlers
        // private HeuristicValue _heuristicValue;
        
         [Header("Pieces Data")]
-        [SerializeField] private Piece blackPawn;
-        [SerializeField] private Piece whitePawn;
-        [SerializeField] private Piece blackRook;
-        [SerializeField] private Piece whiteRook;
-        [SerializeField] private Piece blackKnight;
-        [SerializeField] private Piece whiteKnight;
-        [SerializeField] private Piece blackBishop;
-        [SerializeField] private Piece whiteBishop;
-        [SerializeField] private Piece blackKing;
-        [SerializeField] private Piece whiteKing;
-        [SerializeField] private Piece blackQueen;
-        [SerializeField] private Piece whiteQueen;
+        [SerializeField] public Piece blackPawn;
+        [SerializeField] public Piece whitePawn;
+        [SerializeField] public Piece blackRook;
+        [SerializeField] public Piece whiteRook;
+        [SerializeField] public Piece blackKnight;
+        [SerializeField] public Piece whiteKnight;
+        [SerializeField] public Piece blackBishop;
+        [SerializeField] public Piece whiteBishop;
+        [SerializeField] public Piece blackKing;
+        [SerializeField] public Piece whiteKing;
+        [SerializeField] public Piece blackQueen;
+        [SerializeField] public Piece whiteQueen;
         
         [Header("References")]
         [SerializeField] private GameObject piecePrefab;
@@ -102,6 +102,18 @@ namespace Handlers
                 { whitePawn, whitePawn, whitePawn, null, null, whitePawn, whitePawn, whitePawn },       
                 { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, null, whiteKnight, whiteRook }
             };
+            
+            // Pieces = new Piece[,]
+            // {
+            //     { whiteKing, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, whiteQueen, null, null, null, null, null, blackRook },
+            //     { null, null, null, null, null, null, null, blackKing },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            // };
 
             DisplayMatrix();
         }
