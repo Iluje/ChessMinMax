@@ -12,7 +12,7 @@ namespace Handlers
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
         public int HeuristicValue;
-        public Dictionary<Piece, int[,]> Bonus;
+        public Dictionary<Type, int[,]> Bonus;
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
@@ -124,9 +124,45 @@ namespace Handlers
 
         private int HeuristicPlacementValue()
         {
-            for (int x = 0; x < Pieces.GetLength(0); x++)
+            int valueToAdd = 0;
+            
+            Bonus = new Dictionary<Type, int[,]>()
             {
-                for (int y = 0; y < Pieces.GetLength(1); y++)
+                {
+                    BoardsHandler.Instance.whitePawn.GetType(), new int[8, 8]
+                    {
+                        {0,  0,  0,  0,  0,  0,  0,  0},
+                        {90, 90, 90, 90, 90, 90, 90, 90},
+                        {30, 30, 40, 60, 60, 40, 30, 30},
+                        {10, 10, 20, 40, 40, 20, 10, 10},
+                        {5,  5, 10, 20, 20, 10,  5,  5},
+                        {0,  0,  0,-10,-10,  0,  0,  0},
+                        {5, -5,-10,  0,  0,-10, -5,  5},
+                        {0,  0,  0,  0,  0,  0,  0,  0}
+                    }
+                }, 
+                
+                // {
+                //    BoardsHandler.Instance.whiteKing.GetType(), new int[8, 8]
+                //    {
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //         {0,0,0,0,0,0,0,0},
+                //    }
+                // },
+            };
+            
+            int valueRows = Pieces.GetLength(0);
+            int valueCols = Pieces.GetLength(1);
+            
+            for (int x = 0; x < valueRows; x++)
+            {
+                for (int y = 0; y < valueCols; y++)
                 {
                     Piece piece = Pieces[x, y];
                     
@@ -137,60 +173,17 @@ namespace Handlers
 
                     Type pieceType = piece.GetType();
                     Debug.Log(pieceType);
-
-                    // if (Bonus.TryGetValue(pieceType))
-                    // {
-                    //     
-                    // }
+                    
+                    if (Bonus.TryGetValue(pieceType, out int[,] value))
+                    {
+                        valueToAdd = value[x, y];
+                        Debug.Log(valueToAdd);
+                    }
                 }
             }
             
-            Bonus = new Dictionary<Piece, int[,]>()
-            {
-                {
-                    BoardsHandler.Instance.whitePawn, new int[8, 8]
-                    {
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                    }
-                }, 
-                
-                {
-                   BoardsHandler.Instance.blackPawn, new int[8, 8]
-                   {
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0},
-                   }
-                },
-            };
+            return valueToAdd;
             
-
-            return 0;
-            
-            // //Debug.Log("HeuristicPlacementValue");
-            // for (int x = 0; x < Pieces.GetLength(0); x++)
-            // {
-            //     for (int y = 0; y < Pieces.GetLength(1); y++)
-            //     {
-            //         if (Pieces[x,y] != null)
-            //         {
-            //            // Debug.Log(Pieces[x,y].name + " Position /" + x + "," + y);  
-            //            Debug.Log("Detecte une piece");
-            //         }
-            //     }
-            // }
             
             // SOLUTION 1
             // J'ai créer un dictionnaire, avec dedans une Piece, et un tableau 2D.
