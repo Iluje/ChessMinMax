@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Pieces;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Handlers
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
         public int HeuristicValue;
-        public Dictionary<Piece, int[,]> Bonus; 
+        public Dictionary<Piece, int[,]> Bonus;
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
@@ -82,7 +83,7 @@ namespace Handlers
         }
         
         public int HeursticValue()
-        {
+        { 
             return HeuristicPiecesValue() + HeuristicPlacementValue();
         }
 
@@ -123,6 +124,74 @@ namespace Handlers
 
         private int HeuristicPlacementValue()
         {
+            for (int x = 0; x < Pieces.GetLength(0); x++)
+            {
+                for (int y = 0; y < Pieces.GetLength(1); y++)
+                {
+                    Piece piece = Pieces[x, y];
+                    
+                    if (piece == null)
+                    {
+                        continue;
+                    }
+
+                    Type pieceType = piece.GetType();
+                    Debug.Log(pieceType);
+
+                    // if (Bonus.TryGetValue(pieceType))
+                    // {
+                    //     
+                    // }
+                }
+            }
+            
+            Bonus = new Dictionary<Piece, int[,]>()
+            {
+                {
+                    BoardsHandler.Instance.whitePawn, new int[8, 8]
+                    {
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                    }
+                }, 
+                
+                {
+                   BoardsHandler.Instance.blackPawn, new int[8, 8]
+                   {
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                        {0,0,0,0,0,0,0,0},
+                   }
+                },
+            };
+            
+
+            return 0;
+            
+            // //Debug.Log("HeuristicPlacementValue");
+            // for (int x = 0; x < Pieces.GetLength(0); x++)
+            // {
+            //     for (int y = 0; y < Pieces.GetLength(1); y++)
+            //     {
+            //         if (Pieces[x,y] != null)
+            //         {
+            //            // Debug.Log(Pieces[x,y].name + " Position /" + x + "," + y);  
+            //            Debug.Log("Detecte une piece");
+            //         }
+            //     }
+            // }
+            
             // SOLUTION 1
             // J'ai créer un dictionnaire, avec dedans une Piece, et un tableau 2D.
             // récuperer la position de la piece avec un double for. 
@@ -130,16 +199,13 @@ namespace Handlers
             // pour récuperer le type de la piece, il faut utiliser la fonction GetType() Exemple :
             //node.Pieces[x, y].GetType();
             // si c'est un Pawn, alors lui ajouter le bonus du tableau à la même position acutelle de la piece sur le jeu
-            
+
             // SOLUTION 2
             // J'ai créer un dictionnaire, avec dedans une Piece, et un tableau 2D.
             // récuperer la position de la piece sur le node.
             // si la piece est == à BoardHandler.Instance.(nom de la piece)
             // alors il va se référer au tableau 2D qui possède comme piece Le même nom de la piece.
-
-            return 0;
         }
-
         public int CalculatePlacementValue(Piece piece, Vector2Int position)
         {
            

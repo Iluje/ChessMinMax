@@ -79,6 +79,18 @@ namespace Handlers
             //     {null , null, null,null ,null ,null ,null ,null  },
             // };
             
+            Pieces = new Piece[,]
+            {
+                { blackKing ,null ,null ,null ,null ,null ,null ,null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null,null , null },
+                { null, null, null, null, null, null, null, null },
+                { whiteKing, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, whitePawn, null, null },
+                { null , null, null,null ,null ,null ,null ,null },
+            };
+            
             // Pieces = new Piece[,]
             // {
             //     { null, null, null, null, null, null, null, null },
@@ -91,17 +103,17 @@ namespace Handlers
             //     { null, null, null, null, null, null, null, null },
             // };
             
-            Pieces = new Piece[,]
-            {
-                { blackRook, blackKnight, blackBishop, null, blackKing, blackBishop, null, blackRook },
-                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, null, null, blackPawn },       
-                { null, null, null, null, null, blackPawn, null, null },                                 
-                { null, null, null, whiteKnight, null, null, null, null },                             
-                { null, null, null, whitePawn, null, null, null, null },                                 
-                { null, null, null, null, whitePawn, null, null, null },                                
-                { whitePawn, whitePawn, whitePawn, null, null, whitePawn, whitePawn, whitePawn },       
-                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, null, whiteKnight, whiteRook }
-            };
+            // Pieces = new Piece[,]
+            // {
+            //     { blackRook, blackKnight, blackBishop, null, blackKing, blackBishop, null, blackRook },
+            //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, null, null, blackPawn },       
+            //     { null, null, null, null, null, blackPawn, null, null },                                 
+            //     { null, null, null, whiteKnight, null, null, null, null },                             
+            //     { null, null, null, whitePawn, null, null, null, null },                                 
+            //     { null, null, null, null, whitePawn, null, null, null },                                
+            //     { whitePawn, whitePawn, whitePawn, null, null, whitePawn, whitePawn, whitePawn },       
+            //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, null, whiteKnight, whiteRook }
+            // };
             
             // Pieces = new Piece[,]
             // {

@@ -44,6 +44,7 @@ namespace Game
         [ContextMenu("Think")]
         private void Think()
         {
+            
             Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn);
             
             List<Node> children = currentNode.Children(); 
