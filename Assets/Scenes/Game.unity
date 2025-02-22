@@ -1151,6 +1151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 324137482}
   - component: {fileID: 324137483}
+  - component: {fileID: 324137484}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1191,9 +1192,23 @@ MonoBehaviour:
   endGamePanel: {fileID: 831712229}
   endGameText: {fileID: 554317900}
   audioManager: {fileID: 941541264}
-  isWhiteTurn: 0
+  isWhiteTurn: 1
   isBlackKing: 1
   isWhiteKing: 1
+  Timer: 0
+  StartTimer: 0
+--- !u!114 &324137484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324137481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad638f12720d994fbed3ac81cc04e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &375304730
 GameObject:
   m_ObjectHideFlags: 0

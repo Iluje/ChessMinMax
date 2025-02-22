@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using Handlers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utils;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace Game
 {
@@ -28,6 +29,7 @@ namespace Game
         public bool isBlackKing;
         public bool isWhiteKing;
 
+        
         private void Update()
         {
             if (Input.GetButtonDown("Cancel"))
@@ -44,8 +46,9 @@ namespace Game
         [ContextMenu("Think")]
         private void Think()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             
-            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn);
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
             
             List<Node> children = currentNode.Children(); 
             int bestValue = int.MinValue;
@@ -65,8 +68,10 @@ namespace Game
             BoardsHandler.Instance.ResetMatrix();
             BoardsHandler.Instance.Pieces = bestChild.Pieces;
             BoardsHandler.Instance.DisplayMatrix();
-            Debug.Log(bestChild.HeuristicValue);
             isWhiteTurn = !isWhiteTurn;
+            
+            stopwatch.Stop();
+            Debug.Log(stopwatch.ElapsedMilliseconds + " ms ");
 
             //BoardsHandler.Instance.DisplayMatrix();
 

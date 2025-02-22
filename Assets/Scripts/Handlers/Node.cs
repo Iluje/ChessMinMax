@@ -12,22 +12,29 @@ namespace Handlers
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
         public int HeuristicValue;
-        public Dictionary<Type, int[,]> Bonus;
+        public Dictionary<Type, int[,]> BonusWhite;
+        public Dictionary<Type, int[,]> BonusBlack;
+
+        public int PiecesLenghtRows;
+        public int PiecesLenghtCols;
         
         // Constructeur
-        public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking)
+        public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking, int piecesLenghtRows, int piecesLenghtCols)
         {
             Pieces = (Piece[,]) pieces.Clone();
             IsWhiteTurn = isWhiteTurn;
             IsWhiteThinking = isWhiteThinking;
+
+            PiecesLenghtRows = piecesLenghtRows;
+            PiecesLenghtCols = piecesLenghtCols;
         }
         public List<Node> Children()
         {
             List<Node> children = new List<Node>();
             
-            for (int x = 0; x < Pieces.GetLength(0); x++)
+            for (int x = 0; x < PiecesLenghtRows; x++)
             { 
-                for (int y = 0; y < Pieces.GetLength(1); y++)
+                for (int y = 0; y < PiecesLenghtCols; y++)
                 {
                     if (Pieces[x, y] != null)
                     {
@@ -39,7 +46,7 @@ namespace Handlers
                             
                             foreach (Vector2Int movement in availableMovement)
                             {
-                                Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
+                                Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
                                 node.MovePiece(node.Pieces, piece, position,movement);
                                 
                                 node.HeuristicValue = node.HeursticValue();
@@ -126,58 +133,34 @@ namespace Handlers
         {
             int valueToAdd = 0;
             
-            Bonus = new Dictionary<Type, int[,]>()
+            for (int x = 0; x < PiecesLenghtRows; x++)
             {
-                {
-                    BoardsHandler.Instance.whitePawn.GetType(), new int[8, 8]
-                    {
-                        {0,  0,  0,  0,  0,  0,  0,  0},
-                        {90, 90, 90, 90, 90, 90, 90, 90},
-                        {30, 30, 40, 60, 60, 40, 30, 30},
-                        {10, 10, 20, 40, 40, 20, 10, 10},
-                        {5,  5, 10, 20, 20, 10,  5,  5},
-                        {0,  0,  0,-10,-10,  0,  0,  0},
-                        {5, -5,-10,  0,  0,-10, -5,  5},
-                        {0,  0,  0,  0,  0,  0,  0,  0}
-                    }
-                }, 
-                
-                // {
-                //    BoardsHandler.Instance.whiteKing.GetType(), new int[8, 8]
-                //    {
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //         {0,0,0,0,0,0,0,0},
-                //    }
-                // },
-            };
-            
-            int valueRows = Pieces.GetLength(0);
-            int valueCols = Pieces.GetLength(1);
-            
-            for (int x = 0; x < valueRows; x++)
-            {
-                for (int y = 0; y < valueCols; y++)
+                for (int y = 0; y < PiecesLenghtCols; y++)
                 {
                     Piece piece = Pieces[x, y];
                     
-                    if (piece == null)
+                    if (!piece)
                     {
                         continue;
                     }
-
-                    Type pieceType = piece.GetType();
-                    Debug.Log(pieceType);
                     
-                    if (Bonus.TryGetValue(pieceType, out int[,] value))
+                    Type pieceType = piece.GetType();
+
+                    if (IsWhiteThinking)
                     {
-                        valueToAdd = value[x, y];
-                        Debug.Log(valueToAdd);
+                        if (HeuristicPlacement.BonusWhite.TryGetValue(pieceType, out int[,] value))
+                        {
+                            valueToAdd = value[x, y];
+                            Debug.Log("Blanc");
+                        }
+                    }
+                    else
+                    {
+                        if (HeuristicPlacement.BonusBlack.TryGetValue(pieceType, out int[,] value))
+                        {
+                            valueToAdd = value[x, y];
+                            Debug.Log("Blanc");
+                        }
                     }
                 }
             }
@@ -199,47 +182,11 @@ namespace Handlers
             // si la piece est == à BoardHandler.Instance.(nom de la piece)
             // alors il va se référer au tableau 2D qui possède comme piece Le même nom de la piece.
         }
-        public int CalculatePlacementValue(Piece piece, Vector2Int position)
-        {
-           
-            Debug.Log( "CalculatePlacementValue" + position + " : " + piece.name);
-            // if (piece.name == " BlackRook")
-            // {
-            //     Bonus = new Dictionary<Piece, int[,]>()
-            //     {
-            //     
-            //     }
-            // }
-            
-                
-        return 0;
-        }
         
         public bool IsTerminal()
         {
             return false;
         }
-
-        // private Piece[,] CreateCopy()
-        // {
-        //     if (Pieces == null) return null;
-        //
-        //     int rows = Pieces.GetLength(0);
-        //     int cols = Pieces.GetLength(1);
-        //     Piece[,] newPieces = new Piece[rows, cols];
-        //
-        //     for (int row = 0; row < rows; row++)
-        //     {
-        //         for (int col = 0; col < cols; col++)
-        //         {
-        //             if (Pieces[row, col] != null)
-        //             {
-        //                 newPieces[row, col] = Pieces[row, col];
-        //             }
-        //         }
-        //     }
-        //
-        //     return newPieces;
-        // }
+        
     }
 }

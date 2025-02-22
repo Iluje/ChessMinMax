@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Game;
 using Pieces;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Handlers
@@ -38,6 +39,9 @@ namespace Handlers
         public int NumberOfNode;
         public Node Node;
         public GameManager GameManager;
+
+        [FormerlySerializedAs("valueRowsLenght")] public int valueLenghtRows;
+        [FormerlySerializedAs("valueColsLenght")] public int valueLenghtCols;
 
         private void Start()
         {
@@ -79,15 +83,27 @@ namespace Handlers
             //     {null , null, null,null ,null ,null ,null ,null  },
             // };
             
+            // Pieces = new Piece[,]
+            // {
+            //     { blackKing ,null ,null ,null ,null ,null ,null ,null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null,null , null },
+            //     { null, null, null, null, null, null, null, whitePawn },
+            //     { whiteKing, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, blackPawn, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null , null, null,null ,null ,null ,null ,null },
+            // };
+            
             Pieces = new Piece[,]
             {
                 { blackKing ,null ,null ,null ,null ,null ,null ,null },
-                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, whiteQueen },
                 { null, null, null, null, null, null,null , null },
                 { null, null, null, null, null, null, null, null },
                 { whiteKing, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, whitePawn, null, null },
+                { null, null, null, null, null, blackQueen, null, null },
                 { null , null, null,null ,null ,null ,null ,null },
             };
             
@@ -127,6 +143,8 @@ namespace Handlers
             //     { null, null, null, null, null, null, null, null },
             // };
 
+            valueLenghtRows = Pieces.GetLength(0);
+            valueLenghtCols = Pieces.GetLength(1);
             DisplayMatrix();
         }
 
