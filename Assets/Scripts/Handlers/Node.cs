@@ -17,7 +17,8 @@ namespace Handlers
 
         public int PiecesLenghtRows;
         public int PiecesLenghtCols;
-        
+
+        public int BonusHeuristic;
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking, int piecesLenghtRows, int piecesLenghtCols)
@@ -54,21 +55,6 @@ namespace Handlers
                             }
                         }
                     }
-                    
-                    
-                    // Piece piece = Pieces[x, y];
-                    // if (piece != null)
-                    // { 
-                    //     Vector2Int position = new Vector2Int(x, y);
-                    //     List<Vector2Int> availableMovement = piece.AvailableMovements(position);
-                    //     
-                    //     foreach (Vector2Int movement in availableMovement)
-                    //     { 
-                    //         Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking);
-                    //         node.MovePiece(node.Pieces, piece, position,movement);
-                    //         children.Add(node);
-                    //     }
-                    // } 
                 }
             }
             return children;
@@ -76,15 +62,9 @@ namespace Handlers
 
         public Piece[,] MovePiece(Piece[,] pieces, Piece piece, Vector2Int from, Vector2Int to)
         {
-            // je stock dans une variable la piece qui est dans la position X et Y de la liste 2D.
             //Piece NewPiece = Pieces[from.x, from.y];
-            
-            // je dplace la piece stocker dans à la position ou il peut aller.  
             pieces[to.x, to.y] = piece;
             pieces[from.x, from.y] = null;
-            
-            // appeler la methode HeursticValue.
-            //HeursticValue();
             
             return pieces;
         }
@@ -145,8 +125,9 @@ namespace Handlers
                         continue;
                     }
                     
+                    Debug.Log("Passe dans le for");
                     Type pieceType = piece.GetType();
-
+                    
                     if (IsWhiteThinking)
                     {
                         if (HeuristicPlacement.BonusWhite.TryGetValue(pieceType, out int[,] value))
