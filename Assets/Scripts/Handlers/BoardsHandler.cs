@@ -40,24 +40,24 @@ namespace Handlers
         public Node Node;
         public GameManager GameManager;
 
-        [FormerlySerializedAs("valueRowsLenght")] public int valueLenghtRows;
-        [FormerlySerializedAs("valueColsLenght")] public int valueLenghtCols;
+        public int valueLenghtRows;
+        public int valueLenghtCols;
 
         private void Start()
         {
             Time.timeScale = 1;
             
-            // Pieces = new Piece[,]
-            // {
-            //     { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
-            //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
-            //     { null, null, null, null, null, null,null , null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
-            //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
-            // };
+            Pieces = new Piece[,]
+            {
+                { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
+                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+                { null, null, null, null, null, null,null , null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
+                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
+            };
             
             // Pieces = new Piece[,]
             // {
@@ -95,17 +95,17 @@ namespace Handlers
             //     { null , null, null,null ,null ,null ,null ,null },
             // };
             
-            Pieces = new Piece[,]
-            {
-                { blackKing ,null ,null ,null ,null ,null ,null ,null },
-                { null, null, null, null, null, null, null, whiteQueen },
-                { null, null, null, null, null, null,null , null },
-                { null, null, null, null, null, null, null, null },
-                { whiteKing, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, blackQueen, null, null },
-                { null , null, null,null ,null ,null ,null ,null },
-            };
+            // Pieces = new Piece[,]
+            // {
+            //     { blackKing ,null ,null ,null ,null ,null ,null ,null },
+            //     { null, null, null, null, null, null, null, whiteQueen },
+            //     { null, null, null, null, null, null,null , null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { whiteKing, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, blackQueen, null, null },
+            //     { null , null, null,null ,null ,null ,null ,null },
+            // };
             
             // Pieces = new Piece[,]
             // {

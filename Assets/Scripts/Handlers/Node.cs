@@ -18,6 +18,7 @@ namespace Handlers
         public int PiecesLenghtRows;
         public int PiecesLenghtCols;
         
+        
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking, int piecesLenghtRows, int piecesLenghtCols)
         {
@@ -48,7 +49,6 @@ namespace Handlers
                             {
                                 Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
                                 node.MovePiece(node.Pieces, piece, position,movement);
-                                
                                 node.HeuristicValue = node.HeursticValue();
                                 children.Add(node);
                             }
@@ -77,10 +77,10 @@ namespace Handlers
         public Piece[,] MovePiece(Piece[,] pieces, Piece piece, Vector2Int from, Vector2Int to)
         {
             // je stock dans une variable la piece qui est dans la position X et Y de la liste 2D.
-            Piece NewPiece = Pieces[from.x, from.y];
+            //Piece NewPiece = Pieces[from.x, from.y];
             
             // je dplace la piece stocker dans à la position ou il peut aller.  
-            pieces[to.x, to.y] = NewPiece;
+            pieces[to.x, to.y] = piece;
             pieces[from.x, from.y] = null;
             
             // appeler la methode HeursticValue.
@@ -133,13 +133,14 @@ namespace Handlers
         {
             int valueToAdd = 0;
             
+            
             for (int x = 0; x < PiecesLenghtRows; x++)
             {
                 for (int y = 0; y < PiecesLenghtCols; y++)
                 {
                     Piece piece = Pieces[x, y];
                     
-                    if (!piece)
+                    if (piece == null)
                     {
                         continue;
                     }
@@ -150,16 +151,14 @@ namespace Handlers
                     {
                         if (HeuristicPlacement.BonusWhite.TryGetValue(pieceType, out int[,] value))
                         {
-                            valueToAdd = value[x, y];
-                            Debug.Log("Blanc");
+                            valueToAdd += value[x, y];
                         }
                     }
                     else
                     {
                         if (HeuristicPlacement.BonusBlack.TryGetValue(pieceType, out int[,] value))
                         {
-                            valueToAdd = value[x, y];
-                            Debug.Log("Blanc");
+                            valueToAdd += value[x, y];
                         }
                     }
                 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
 using System.Diagnostics;
+using Pieces;
 using Debug = UnityEngine.Debug;
 
 namespace Game
@@ -41,6 +42,11 @@ namespace Game
             {
                 Think();
             }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                
+            }
         }
         
         [ContextMenu("Think")]
@@ -62,7 +68,9 @@ namespace Game
                 {
                     bestValue = value;
                     bestChild = child;
+                    //Debug.Log(" Value " + value);
                 }
+                //Debug.Log(" best " + bestValue);
             }
 
             BoardsHandler.Instance.ResetMatrix();
