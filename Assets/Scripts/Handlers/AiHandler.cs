@@ -50,5 +50,12 @@ namespace Handlers
             return value;
          }
       }
+
+      public int AlphaBeta()
+      {
+         
+         
+         return 0;
+      }
    }
 }
