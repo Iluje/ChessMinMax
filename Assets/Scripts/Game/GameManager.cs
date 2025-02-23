@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
 using System.Diagnostics;
+using System.Linq;
 using Pieces;
+using Unity.VisualScripting;
 using Debug = UnityEngine.Debug;
 
 namespace Game
@@ -40,8 +42,8 @@ namespace Game
 
             if (Input.GetButtonDown("Fire2"))
             {
-               //ThinkMinMax();
-               ThinkAlphaBeta();
+               ThinkMinMax();
+               //ThinkAlphaBeta();
             }
         }
         
@@ -54,18 +56,28 @@ namespace Game
             
             List<Node> children = currentNode.Children(); 
             int bestValue = int.MinValue;
+
+            //Dictionary<Node, int> dictionary = new Dictionary<Node, int>();
             Node bestChild = null;
             
             foreach (Node child in children)
             {
                 int value = AiHandler.MinMax(child, Depht, false);
                 
-                if (value > bestValue)
-                {
-                    bestValue = value;
-                    bestChild = child;
-                }
-                //Debug.Log(" best " + bestValue);
+                // dictionary.Add(child, value);
+                //
+                // if (dictionary.Count >= children.Count)
+                // {
+                //     Debug.Log(dictionary);
+                //     var sortedDictionary = dictionary.OrderByDescending(node => node.Value).First();
+                //     bestChild = sortedDictionary.Key;
+                // }
+                
+                 if (value > bestValue)
+                 {
+                     bestValue = value;
+                     bestChild = child;
+                 }
             }
 
             BoardsHandler.Instance.ResetMatrix();
@@ -75,14 +87,6 @@ namespace Game
             
             stopwatch.Stop();
             Debug.Log(stopwatch.ElapsedMilliseconds + " ms ");
-
-            //BoardsHandler.Instance.DisplayMatrix();
-
-            //Debug.Log("Heuristic : " + max + " child is ");
-            //Debug.Log("<color=red> Heuristic best Value </color>" + bestValue + " tour des joueurs blanc ?" + isWhiteTurn);
-            //BoardsHandler.Instance.Pieces = bestChild.Pieces;
-
-            //Debug.Log("<color=green> Board count  </color> " + BoardsHandler.Instance.Pieces);
         }
 
         private void ThinkAlphaBeta()

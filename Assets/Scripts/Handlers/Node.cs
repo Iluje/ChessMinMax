@@ -12,8 +12,6 @@ namespace Handlers
         public bool IsWhiteTurn;
         public bool IsWhiteThinking;
         public int HeuristicValue;
-        public Dictionary<Type, int[,]> BonusWhite;
-        public Dictionary<Type, int[,]> BonusBlack;
 
         public int PiecesLenghtRows;
         public int PiecesLenghtCols;
@@ -71,13 +69,9 @@ namespace Handlers
         
         public int HeursticValue()
         {
-           // Debug.Log(HeuristicPiecesValue() + HeuristicValue);
             return HeuristicPiecesValue() + BonusHeuristic;
         }
-
-        /**
-         * Méthode d'évaluation d'heuristic pour les valeurs de pieces
-         */
+        
         private int HeuristicPiecesValue()
         {
             int WhiteValue = 0;
