@@ -43,6 +43,11 @@ namespace Pieces
                 {
                     for (i = position.x + 1; i <= position.x + 1; i++)
                     {
+                        if (i > 7)
+                        { 
+                            break;  
+                        }
+                        
                         if (board[i, position.y] == null)
                         {
                             movements.Add(new Vector2Int(i, position.y));
@@ -99,6 +104,11 @@ namespace Pieces
                 {
                     for (i = position.x - 1; i >= position.x - 1; i--)
                     {
+                        if (i < 0)
+                        {
+                            break;
+                        }
+                        
                         if (board[i, position.y] == null)
                         {
                             movements.Add(new Vector2Int(i, position.y));

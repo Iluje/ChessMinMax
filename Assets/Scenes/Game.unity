@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea058a4e9f71ea43b7b8217bc5651be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Depht: 1
+  Depht: 2
   AiHandler: {fileID: 311530436}
   lastClickGameObject: {fileID: 0}
   endGamePanel: {fileID: 831712229}

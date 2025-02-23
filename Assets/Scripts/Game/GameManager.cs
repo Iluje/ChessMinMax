@@ -42,11 +42,6 @@ namespace Game
             {
                 Think();
             }
-
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                
-            }
         }
         
         [ContextMenu("Think")]
@@ -68,7 +63,6 @@ namespace Game
                 {
                     bestValue = value;
                     bestChild = child;
-                    //Debug.Log(" Value " + value);
                 }
                 //Debug.Log(" best " + bestValue);
             }

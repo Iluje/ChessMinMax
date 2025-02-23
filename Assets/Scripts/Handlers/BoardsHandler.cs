@@ -86,12 +86,12 @@ namespace Handlers
             // Pieces = new Piece[,]
             // {
             //     { blackKing ,null ,null ,null ,null ,null ,null ,null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null,null , null },
             //     { null, null, null, null, null, null, null, whitePawn },
-            //     { whiteKing, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, blackPawn, null, null },
+            //     { null, null, null, null, null, null,null , null },
             //     { null, null, null, null, null, null, null, null },
+            //     { whiteKing, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, blackPawn, null },
             //     { null , null, null,null ,null ,null ,null ,null },
             // };
             

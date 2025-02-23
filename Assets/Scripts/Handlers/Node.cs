@@ -45,11 +45,11 @@ namespace Handlers
                             Piece piece = Pieces[x, y];
                             Vector2Int position = new Vector2Int(x, y);
                             List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
-                            
                             foreach (Vector2Int movement in availableMovement)
                             {
                                 Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
-                                node.MovePiece(node.Pieces, piece, position,movement);
+                                node.MovePiece(node.Pieces, piece, position,movement);  
+                                node.HeuristicPlacementValue(); 
                                 node.HeuristicValue = node.HeursticValue();
                                 children.Add(node);
                             }
@@ -70,8 +70,9 @@ namespace Handlers
         }
         
         public int HeursticValue()
-        { 
-            return HeuristicPiecesValue() + HeuristicPlacementValue();
+        {
+           // Debug.Log(HeuristicPiecesValue() + HeuristicValue);
+            return HeuristicPiecesValue() + BonusHeuristic;
         }
 
         /**
@@ -125,27 +126,26 @@ namespace Handlers
                         continue;
                     }
                     
-                    Debug.Log("Passe dans le for");
                     Type pieceType = piece.GetType();
                     
                     if (IsWhiteThinking)
                     {
                         if (HeuristicPlacement.BonusWhite.TryGetValue(pieceType, out int[,] value))
                         {
-                            valueToAdd += value[x, y];
+                            BonusHeuristic += value[x, y];
                         }
                     }
                     else
                     {
                         if (HeuristicPlacement.BonusBlack.TryGetValue(pieceType, out int[,] value))
                         {
-                            valueToAdd += value[x, y];
+                            BonusHeuristic += value[x, y];
                         }
                     }
                 }
             }
-            
-            return valueToAdd;
+            //Debug.Log(BonusHeuristic);
+            return BonusHeuristic;
             
             
             // SOLUTION 1
