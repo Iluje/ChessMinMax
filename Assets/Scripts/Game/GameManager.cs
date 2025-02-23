@@ -40,12 +40,13 @@ namespace Game
 
             if (Input.GetButtonDown("Fire2"))
             {
-                Think();
+               //ThinkMinMax();
+               ThinkAlphaBeta();
             }
         }
         
         [ContextMenu("Think")]
-        private void Think()
+        private void ThinkMinMax()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             
@@ -82,6 +83,37 @@ namespace Game
             //BoardsHandler.Instance.Pieces = bestChild.Pieces;
 
             //Debug.Log("<color=green> Board count  </color> " + BoardsHandler.Instance.Pieces);
+        }
+
+        private void ThinkAlphaBeta()
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
+            
+            List<Node> children = currentNode.Children(); 
+            int bestValue = int.MinValue;
+            Node bestChild = null;
+            
+            foreach (Node child in children)
+            {
+                int value = AiHandler.AlphaBeta(child, Depht, 0,0, false);
+                
+                if (value > bestValue)
+                {
+                    bestValue = value;
+                    bestChild = child;
+                }
+                //Debug.Log(" best " + bestValue);
+            }
+        
+            BoardsHandler.Instance.ResetMatrix();
+            BoardsHandler.Instance.Pieces = bestChild.Pieces;
+            BoardsHandler.Instance.DisplayMatrix();
+            isWhiteTurn = !isWhiteTurn;
+            
+            stopwatch.Stop();
+            Debug.Log(stopwatch.ElapsedMilliseconds + " ms ");
         }
     }
 }
