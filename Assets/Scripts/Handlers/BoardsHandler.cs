@@ -47,17 +47,17 @@ namespace Handlers
         {
             Time.timeScale = 1;
             
-            // Pieces = new Piece[,]
-            // {
-            //     { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
-            //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
-            //     { null, null, null, null, null, null,null , null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
-            //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
-            // };
+            Pieces = new Piece[,]
+            {
+                { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
+                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+                { null, null, null, null, null, null,null , null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
+                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
+            };
             
             // Pieces = new Piece[,]
             // {
@@ -131,17 +131,17 @@ namespace Handlers
             //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, null, whiteKnight, whiteRook }
             // };
             
-            Pieces = new Piece[,]
-            {
-                { whiteKing, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, whiteQueen, null, null, null, null, null, blackRook },
-                { null, null, null, null, null, null, null, blackKing },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-            };
+            // Pieces = new Piece[,]
+            // {
+            //     { whiteKing, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, whiteQueen, null, null, null, null, null, blackRook },
+            //     { null, null, null, null, null, null, null, blackKing },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            // };
 
             valueLenghtRows = Pieces.GetLength(0);
             valueLenghtCols = Pieces.GetLength(1);
