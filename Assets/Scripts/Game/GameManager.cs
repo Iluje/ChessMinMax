@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
 using System.Diagnostics;
-using System.Linq;
-using Pieces;
-using Unity.VisualScripting;
 using Debug = UnityEngine.Debug;
 
 namespace Game

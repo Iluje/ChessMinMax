@@ -47,14 +47,6 @@ namespace Handlers
                             
                         foreach (Vector2Int movement in availableMovement)
                         {
-                            // if (movement.x == BoardsHandler.Instance.Echec().x && movement.y == BoardsHandler.Instance.Echec().y)
-                            // {
-                            //     if (piece.isWhite != IsWhiteTurn)
-                            //     {
-                            //         Debug.Log("le pion est en danger");
-                            //     }
-                            // }
-                                
                             Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
                             node.MovePiece(node.Pieces, piece, position,movement);
 
@@ -62,7 +54,6 @@ namespace Handlers
                             node.HeuristicPlacementValue(); 
                             node.HeuristicValue = node.HeursticValue(); 
                             children.Add(node);
-                                
                         }
                     }
                 }
@@ -84,11 +75,11 @@ namespace Handlers
             return BonusPieces + BonusHeuristic;
         }
         
-        private int HeuristicPiecesValue()
+        private void HeuristicPiecesValue()
         {
             int WhiteValue = 0;
             int BlackValue = 0;
-            int HeuristicValue = 0;
+            //int HeuristicValue = 0;
 
             if (Pieces == null)
             {
@@ -113,12 +104,12 @@ namespace Handlers
             if (IsWhiteThinking) BonusPieces = WhiteValue - BlackValue;
             else BonusPieces = BlackValue - WhiteValue;
             
-            return HeuristicValue;
+            //return HeuristicValue;
         }
 
-        private int HeuristicPlacementValue()
+        private void HeuristicPlacementValue()
         {
-            int valueToAdd = 0;
+            //int valueToAdd = 0;
             
             
             for (int x = 0; x < PiecesLenghtRows; x++)
@@ -151,7 +142,7 @@ namespace Handlers
                 }
             }
             //Debug.Log(BonusHeuristic);
-            return BonusHeuristic;
+           // return BonusHeuristic;
             
             
             // SOLUTION 1
