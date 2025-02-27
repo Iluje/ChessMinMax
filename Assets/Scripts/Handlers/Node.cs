@@ -17,6 +17,7 @@ namespace Handlers
         public int PiecesLenghtCols;
 
         public int BonusHeuristic;
+        public int BonusPieces;
         
         // Constructeur
         public Node(Piece[,] pieces, bool isWhiteTurn, bool isWhiteThinking, int piecesLenghtRows, int piecesLenghtCols)
@@ -56,8 +57,8 @@ namespace Handlers
                                 
                             Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
                             node.MovePiece(node.Pieces, piece, position,movement);
-                            
-                            
+
+                            node.HeuristicPiecesValue();
                             node.HeuristicPlacementValue(); 
                             node.HeuristicValue = node.HeursticValue(); 
                             children.Add(node);
@@ -80,7 +81,7 @@ namespace Handlers
         
         public int HeursticValue()
         {
-            return HeuristicPiecesValue() + BonusHeuristic;
+            return BonusPieces + BonusHeuristic;
         }
         
         private int HeuristicPiecesValue()
@@ -109,8 +110,8 @@ namespace Handlers
                 }
             }
             
-            if (IsWhiteThinking) HeuristicValue = WhiteValue - BlackValue;
-            else HeuristicValue = BlackValue - WhiteValue;
+            if (IsWhiteThinking) BonusPieces = WhiteValue - BlackValue;
+            else BonusPieces = BlackValue - WhiteValue;
             
             return HeuristicValue;
         }
