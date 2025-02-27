@@ -28,7 +28,9 @@ namespace Handlers
 
             PiecesLenghtRows = piecesLenghtRows;
             PiecesLenghtCols = piecesLenghtCols;
+            
         }
+        
         public List<Node> Children()
         {
             List<Node> children = new List<Node>();
