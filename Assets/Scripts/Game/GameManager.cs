@@ -57,21 +57,11 @@ namespace Game
             List<Node> children = currentNode.Children(); 
             int bestValue = int.MinValue;
 
-            //Dictionary<Node, int> dictionary = new Dictionary<Node, int>();
             Node bestChild = null;
             
             foreach (Node child in children)
             {
                 int value = AiHandler.MinMax(child, Depht, false);
-                
-                // dictionary.Add(child, value);
-                //
-                // if (dictionary.Count >= children.Count)
-                // {
-                //     Debug.Log(dictionary);
-                //     var sortedDictionary = dictionary.OrderByDescending(node => node.Value).First();
-                //     bestChild = sortedDictionary.Key;
-                // }
                 
                  if (value > bestValue)
                  {

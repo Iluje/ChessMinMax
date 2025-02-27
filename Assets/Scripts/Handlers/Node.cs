@@ -36,31 +36,42 @@ namespace Handlers
             { 
                 for (int y = 0; y < PiecesLenghtCols; y++)
                 {
-                    if (Pieces[x, y] != null)
+                    
+                    if (Pieces[x, y] && Pieces[x, y].isWhite == IsWhiteTurn)
                     {
-                        if (Pieces[x, y].isWhite == IsWhiteTurn)
+                        Piece piece = Pieces[x, y];
+                            
+                        Vector2Int position = new Vector2Int(x, y);
+                        List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
+                            
+                        foreach (Vector2Int movement in availableMovement)
                         {
-                            Piece piece = Pieces[x, y];
-                            Vector2Int position = new Vector2Int(x, y);
-                            List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
-                            foreach (Vector2Int movement in availableMovement)
-                            {
-                                Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
-                                node.MovePiece(node.Pieces, piece, position,movement);  
-                                node.HeuristicPlacementValue(); 
-                                node.HeuristicValue = node.HeursticValue();
-                                children.Add(node);
-                            }
+                            // if (movement.x == BoardsHandler.Instance.Echec().x && movement.y == BoardsHandler.Instance.Echec().y)
+                            // {
+                            //     if (piece.isWhite != IsWhiteTurn)
+                            //     {
+                            //         Debug.Log("le pion est en danger");
+                            //     }
+                            // }
+                                
+                            Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
+                            node.MovePiece(node.Pieces, piece, position,movement);
+                            
+                            
+                            node.HeuristicPlacementValue(); 
+                            node.HeuristicValue = node.HeursticValue(); 
+                            children.Add(node);
+                                
                         }
                     }
                 }
+                
             }
             return children;
         }
 
         public Piece[,] MovePiece(Piece[,] pieces, Piece piece, Vector2Int from, Vector2Int to)
         {
-            //Piece NewPiece = Pieces[from.x, from.y];
             pieces[to.x, to.y] = piece;
             pieces[from.x, from.y] = null;
             

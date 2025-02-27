@@ -121,6 +121,18 @@ namespace Handlers
             
             // Pieces = new Piece[,]
             // {
+            //     { blackKing, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, blackPawn, null },
+            //     { null, null, null, null, null, whitePawn, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { whiteKing, null, null, null, null, null, null, null },
+            // };
+            
+            // Pieces = new Piece[,]
+            // {
             //     { blackRook, blackKnight, blackBishop, null, blackKing, blackBishop, null, blackRook },
             //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, null, null, blackPawn },       
             //     { null, null, null, null, null, blackPawn, null, null },                                 
@@ -154,9 +166,9 @@ namespace Handlers
             
             PawnToQueen();
             
-            for (int i = 0; i < Pieces.GetLength(0); i++)
+            for (int i = 0; i < valueLenghtRows; i++)
             {
-                for (int j = 0; j < Pieces.GetLength(1); j++)
+                for (int j = 0; j < valueLenghtCols; j++)
                 {
                     GameObject newPiece;
                     
@@ -235,6 +247,24 @@ namespace Handlers
                 GameManager.Instance.endGamePanel.SetActive(true);
                 GameManager.Instance.endGameText.text = " Victory Black Player ! ";
             }
+        }
+
+        public Vector2Int Echec()
+        {
+            Vector2Int KingPosition = new Vector2Int();
+            
+            for (int x = 0; x < valueLenghtRows; x++)
+            {
+                for (int y = 0; y < valueLenghtCols; y++)
+                {
+                    if (Pieces[x, y] is King && Pieces[x, y].isWhite == GameManager.Instance.isWhiteTurn)
+                    {
+                        KingPosition = new Vector2Int(x, y);
+                    }
+                }
+            }
+
+            return KingPosition;
         }
     }
 } 
