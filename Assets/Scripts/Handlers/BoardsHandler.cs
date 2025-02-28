@@ -40,24 +40,24 @@ namespace Handlers
         public Node Node;
         public GameManager GameManager;
 
-        public int valueLenghtRows;
-        public int valueLenghtCols;
+        static public int valueLenghtRows;
+        static public int valueLenghtCols;
 
         private void Start()
         {
             Time.timeScale = 1;
             
-            // Pieces = new Piece[,]
-            // {
-            //     { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
-            //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
-            //     { null, null, null, null, null, null,null , null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { null, null, null, null, null, null, null, null },
-            //     { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
-            //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
-            // };
+            Pieces = new Piece[,]
+            {
+                { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
+                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+                { null, null, null, null, null, null,null , null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
+                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
+            };
             
             // Pieces = new Piece[,]
             // {
@@ -100,7 +100,8 @@ namespace Handlers
             //     { blackKing ,null ,null ,null ,null ,null ,null ,null },
             //     { null, null, null, null, null, null, null, whiteQueen },
             //     { null, null, null, null, null, null,null , null },
-            //     { null, null, null, null, null, null, null, null },
+            //
+            // { null, null, null, null, null, null, null, null },
             //     { whiteKing, null, null, null, null, null, null, null },
             //     { null, null, null, null, null, null, null, null },
             //     { null, null, null, null, null, blackQueen, null, null },
@@ -162,7 +163,7 @@ namespace Handlers
 
         public void DisplayMatrix()
         {
-            PiecesDisplay = new GameObject[Pieces.GetLength(0), Pieces.GetLength(1)];
+            PiecesDisplay = new GameObject[valueLenghtRows, valueLenghtCols];
             
             PawnToQueen();
             
@@ -199,14 +200,14 @@ namespace Handlers
 
         private void PawnToQueen()
         {
-            for (int i = 0; i < Pieces.GetLength(0); i++)
+            for (int i = 0; i < valueLenghtRows; i++)
             {
                 if (Pieces[0, i] == whitePawn)
                 {
                     Pieces[0, i] = whiteQueen;
                 }
             }
-            for (int i = 0; i < Pieces.GetLength(0); i++)
+            for (int i = 0; i < valueLenghtCols; i++)
             {
                 if (Pieces[7, i] == blackPawn)
                 {
@@ -220,9 +221,9 @@ namespace Handlers
             GameManager.Instance.isBlackKing = false;
             GameManager.Instance.isWhiteKing = false;
             
-            for (int i = 0; i < Pieces.GetLength(0); i++)
+            for (int i = 0; i < valueLenghtRows; i++)
             {
-                for (int j = 0; j < Pieces.GetLength(1); j++)
+                for (int j = 0; j < valueLenghtCols; j++)
                 {
                     if (Pieces[i, j] == blackKing)
                     {

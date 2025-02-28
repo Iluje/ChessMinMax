@@ -46,10 +46,10 @@ namespace Handlers
                             
                         Vector2Int position = new Vector2Int(x, y);
                         List<Vector2Int> availableMovement = piece.AvailableMovements(position, Pieces);
-                            
+                        
                         foreach (Vector2Int movement in availableMovement)
                         {
-                            Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
+                            Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.valueLenghtRows, BoardsHandler.valueLenghtCols);
                             node.MovePiece(node.Pieces, piece, position,movement);
 
                             node.HeuristicPiecesValue();

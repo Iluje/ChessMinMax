@@ -49,7 +49,7 @@ namespace Game
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             
-            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn, BoardsHandler.valueLenghtRows, BoardsHandler.valueLenghtCols);
             
             List<Node> children = currentNode.Children(); 
             int bestValue = int.MinValue;
