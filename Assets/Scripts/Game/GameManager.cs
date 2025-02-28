@@ -39,8 +39,8 @@ namespace Game
 
             if (Input.GetButtonDown("Fire2"))
             {
-               ThinkMinMax();
-               //ThinkAlphaBeta();
+               //ThinkMinMax();
+               ThinkAlphaBeta();
             }
         }
         
@@ -77,35 +77,38 @@ namespace Game
             Debug.Log(stopwatch.ElapsedMilliseconds + " ms ");
         }
 
-        // private void ThinkAlphaBeta()
-        // {
-        //     Stopwatch stopwatch = Stopwatch.StartNew();
-        //     
-        //     Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn, BoardsHandler.Instance.valueLenghtRows, BoardsHandler.Instance.valueLenghtCols);
-        //     
-        //     List<Node> children = currentNode.Children(); 
-        //     int bestValue = int.MinValue;
-        //     Node bestChild = null;
-        //     
-        //     foreach (Node child in children)
-        //     {
-        //         int value = AiHandler.AlphaBeta(child, Depht, 0,0, false);
-        //         
-        //         if (value > bestValue)
-        //         {
-        //             bestValue = value;
-        //             bestChild = child;
-        //         }
-        //         //Debug.Log(" best " + bestValue);
-        //     }
-        //
-        //     BoardsHandler.Instance.ResetMatrix();
-        //     BoardsHandler.Instance.Pieces = bestChild.Pieces;
-        //     BoardsHandler.Instance.DisplayMatrix();
-        //     isWhiteTurn = !isWhiteTurn;
-        //     
-        //     stopwatch.Stop();
-        //     Debug.Log(stopwatch.ElapsedMilliseconds + " ms ");
-        // }
+        private void ThinkAlphaBeta()
+        {
+            int alpha = int.MinValue;
+            int beta = int.MaxValue;
+            
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            
+            Node currentNode = new Node(BoardsHandler.Instance.Pieces, isWhiteTurn, isWhiteTurn, BoardsHandler.valueLenghtRows, BoardsHandler.valueLenghtCols);
+            
+            List<Node> children = currentNode.Children(); 
+            int bestValue = int.MinValue;
+            Node bestChild = null;
+            
+            foreach (Node child in children)
+            {
+                int value = AiHandler.AlphaBeta(child, Depht, alpha,beta, false);
+                
+                if (value > bestValue)
+                {
+                    bestValue = value;
+                    bestChild = child;
+                }
+                //Debug.Log(" best " + bestValue);
+            }
+        
+            BoardsHandler.Instance.ResetMatrix();
+            BoardsHandler.Instance.Pieces = bestChild.Pieces;
+            BoardsHandler.Instance.DisplayMatrix();
+            isWhiteTurn = !isWhiteTurn;
+            
+            stopwatch.Stop();
+            Debug.Log(stopwatch.ElapsedMilliseconds + " ms ");
+        }
     }
 }
