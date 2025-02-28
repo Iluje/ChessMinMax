@@ -43,20 +43,38 @@ namespace Handlers
         static public int valueLenghtRows;
         static public int valueLenghtCols;
 
+        static public Vector2Int PositionWhiteKing;
+        static public Vector2Int PositionBlackKing;
+
+        static public bool BlackKingIsEchec;
+        static public bool WhiteKingIsEchec;
+
         private void Start()
         {
             Time.timeScale = 1;
             
-            Pieces = new Piece[,]
+            // Pieces = new Piece[,]
+            // {
+            //     { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
+            //     { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
+            //     { null, null, null, null, null, null,null , null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
+            //     { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
+            // };
+            
+            Pieces = new Piece[,] // Echec au ROI
             {
-                { blackRook, blackKnight, blackBishop, blackQueen, blackKing, blackBishop, blackKnight, blackRook },
-                { blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn },
-                { null, null, null, null, null, null,null , null },
+                { blackKing, null, null, null, null, null, null, null },
+                { blackPawn,blackRook , whitePawn, null, null, null, null, null },
+                { null, null, null, null, null, whiteRook,null , null },
+                { null, null, blackPawn, null, null, null, null, null },
+                { null, null, null, null, null, null, null, null },
+                { null, null, null, null, whiteKing, null, null, null },
                 { null, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn },
-                { whiteRook, whiteKnight, whiteBishop, whiteQueen, whiteKing, whiteBishop, whiteKnight, whiteRook },
             };
             
             // Pieces = new Piece[,]
@@ -250,7 +268,7 @@ namespace Handlers
             }
         }
 
-        public Vector2Int Echec()
+        public void Echec()
         {
             Vector2Int KingPosition = new Vector2Int();
             
@@ -258,14 +276,21 @@ namespace Handlers
             {
                 for (int y = 0; y < valueLenghtCols; y++)
                 {
-                    if (Pieces[x, y] is King && Pieces[x, y].isWhite == GameManager.Instance.isWhiteTurn)
+                    if (Pieces[x, y] is King)
                     {
-                        KingPosition = new Vector2Int(x, y);
+                        if (Pieces[x, y].isWhite)
+                        {
+                            PositionWhiteKing = new Vector2Int(x, y);
+                            Debug.Log("Le roi blanc est à " + PositionWhiteKing.x + " " + PositionWhiteKing.y);
+                        }
+                        else
+                        {
+                            PositionBlackKing = new Vector2Int(x, y);
+                            Debug.Log("Le roi noir est à " + PositionBlackKing.x + " " + PositionBlackKing.y);
+                        }
                     }
                 }
             }
-
-            return KingPosition;
         }
     }
 } 

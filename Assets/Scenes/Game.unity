@@ -6296,8 +6296,6 @@ MonoBehaviour:
   gridParent: {fileID: 2013352920}
   NumberOfNode: 0
   GameManager: {fileID: 324137483}
-  valueLenghtRows: 0
-  valueLenghtCols: 0
 --- !u!1 &2036374905
 GameObject:
   m_ObjectHideFlags: 0

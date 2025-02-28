@@ -55,6 +55,7 @@ namespace Game
             int bestValue = int.MinValue;
 
             Node bestChild = null;
+            BoardsHandler.Instance.Echec();
             
             foreach (Node child in children)
             {

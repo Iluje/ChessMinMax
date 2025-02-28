@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game;
 using Pieces;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ namespace Handlers
         public List<Node> Children()
         {
             List<Node> children = new List<Node>();
+            BoardsHandler.Instance.Echec();
             
             for (int x = 0; x < PiecesLenghtRows; x++)
             { 
@@ -51,10 +53,16 @@ namespace Handlers
                         {
                             Node node = new Node(Pieces, !IsWhiteTurn, IsWhiteThinking, BoardsHandler.valueLenghtRows, BoardsHandler.valueLenghtCols);
                             node.MovePiece(node.Pieces, piece, position,movement);
-
+                            
                             node.HeuristicPiecesValue();
                             node.HeuristicPlacementValue(); 
-                            node.HeuristicValue = node.HeursticValue(); 
+                            node.HeuristicValue = node.HeursticValue();
+                            
+                            // if (HeuristicValue > 1000)
+                            // {
+                            //     Debug.Log(HeuristicValue);
+                            // }
+                            
                             children.Add(node);
                         }
                     }
